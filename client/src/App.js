@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import Personas from './components/Personas/Personas';
+import Personas from './components/Personas';
 function App () {
   return (
     <div className="App">
