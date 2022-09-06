@@ -2,15 +2,34 @@ import React, { useState, useEffect } from "react";
 import { getPersonas } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import Button from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 export default function Personas() {
 	const dispatch = useDispatch();
+	const [persona, setPersona] = useState({
+		nombre: "",
+		apellido: "",
+		docTipo: "",
+		docNro: "",
+		mail: "",
+		telMovil: "",
+		telPersonal: "",
+		telLaboral: "",
+		linkedin: "",
+		cv: "",
+		personaTipoId: "",
+		domCalle: "",
+		domAltura: "",
+		domLocalidad: "",
+		domProvincia: "",
+		domPais: "",
+		domCp: "",
+	});
 
-	const personas = useSelector((state) => state.personasInfo);
+	// const personas = useSelector((state) => state.personasInfo);
 	//DocTipo: D.N.I
 
 	useEffect(() => {
@@ -22,10 +41,35 @@ export default function Personas() {
 		{ value: "strawberry", label: "Strawberry" },
 		{ value: "vanilla", label: "Vanilla" },
 	];
+	const tipoDocumento = [
+		{ value: 1, label: "L.E / DNI" },
+		{ value: 4, label: "Carnet de Extranjeria" },
+		{ value: 7, label: "Pasaporte" },
+	];
+	const pais = [
+		{ value: "argentina", label: "Argentina" },
+		{ value: "peru", label: "perú" },
+		{ value: "chile", label: "Chile" },
+	];
+	const provincia = [
+		{ value: "caba", label: "CABA" },
+		{ value: "buenos aires", label: "Buenos Aires" },
+		{ value: "cordoba", label: "Cordoba" },
+	];
+	const localidad = [
+		{ value: "palermo", label: "Palermo" },
+		{ value: "villa urquiza", label: "Villa Urquiza" },
+		{ value: "avellaneda", label: "Avellaneda" },
+	];
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		console.log();
+	}
 
 	return (
 		<div>
-			<Form>
+			<Form style={{ padding: "10px" }}>
 				<fieldset style={{ border: "3px solid" }}>
 					<legend className='float-none w-auto p-2'>
 						Datos Personales
@@ -50,7 +94,7 @@ export default function Personas() {
 					<Row>
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Tipo de documento</Form.Label>
-							<Select options={options} />
+							<Select options={tipoDocumento} />
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
@@ -105,10 +149,7 @@ export default function Personas() {
 
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>CV</Form.Label>
-							<Form.Control
-								type='file'
-								placeholder='Arrstre aqui su CV'
-							/>
+							<Form.Control type='file' />
 						</Form.Group>
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Persona tipo id</Form.Label>
@@ -125,17 +166,17 @@ export default function Personas() {
 					<Row>
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Pais</Form.Label>
-							<Select options={options} />
+							<Select options={pais} />
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Provincia</Form.Label>
-							<Select options={options} />
+							<Select options={provincia} />
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Localidad</Form.Label>
-							<Select options={options} />
+							<Select options={localidad} />
 						</Form.Group>
 					</Row>
 					<Row>
@@ -164,6 +205,15 @@ export default function Personas() {
 						</Form.Group>
 					</Row>
 				</fieldset>
+				<div className='m-2 d-flex justify-content-end'>
+					<Button
+						type='submit'
+						onClick={(e) => handleSubmit(e)}
+						className='btn btn-primary'>
+						<i className='fa fa-save'></i> Guardar
+					</Button>
+					<Button className='btn btn-light'>Vovler al listado</Button>
+				</div>
 			</Form>
 		</div>
 	);
