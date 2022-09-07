@@ -2,13 +2,25 @@ import React, { useState, useEffect } from "react";
 import { getPersonas } from "../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
+import Async, { useAsync } from "react-select/async";
+
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
+function validate(persona) {
+	let { nombre, apellido } = persona;
+	let errors = {};
+	if (nombre.length != 7) errors.nombre = "Name must be 6";
+	if (apellido.length !== 3) errors.apellido = "Last name must be 3";
+	return errors;
+}
+
 export default function Personas() {
 	const dispatch = useDispatch();
+	const [errors, setErrors] = useState({});
+	const [validated, setValidated] = useState(false);
 	const [persona, setPersona] = useState({
 		nombre: "",
 		apellido: "",
@@ -64,44 +76,122 @@ export default function Personas() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log();
+		setPersona({
+			nombre: "",
+			apellido: "",
+			docTipo: "",
+			docNro: "",
+			mail: "",
+			telMovil: "",
+			telPersonal: "",
+			telLaboral: "",
+			linkedin: "",
+			cv: "",
+			personaTipoId: "",
+			domCalle: "",
+			domAltura: "",
+			domLocalidad: "",
+			domProvincia: "",
+			domPais: "",
+			domCp: "",
+		});
+	}
+
+	function handleOnChange(e) {
+		let { name, value } = e.target;
+
+		// Los selects no devuelven un name, por lo que el value del e.target
+		// se lo tenemos que asignar al value del key de nuestro useState
+
+		const validation = () => {
+			const form = e.currentTarget;
+			if (form.checkValidity() === false) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+			setValidated(true);
+		};
+		validation();
+		setPersona({
+			...persona,
+			[name]: value,
+		});
+		setErrors(
+			validate({
+				...persona,
+				[name]: value,
+			})
+		);
 	}
 
 	return (
 		<div>
-			<Form style={{ padding: "10px" }}>
-				<fieldset style={{ border: "3px solid" }}>
+			<Form
+				noValidate
+				validated={validated}
+				style={{ padding: "10px" }}
+				onSubmit={handleSubmit}>
+				<fieldset style={{ border: "3px solid" }} className='px-2'>
 					<legend className='float-none w-auto p-2'>
-						Datos Personales
+						Personal Information
 					</legend>
 					{/* <label>Persona Id</label> */}
 					<Row>
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Nombre</Form.Label>
+							<Form.Label>First Name</Form.Label>
 							<Form.Control
 								type='text'
-								placeholder='Ingrese el nombre'
+								placeholder='John'
+								name='nombre'
+								required
+								value={persona.nombre}
+								onChange={(e) => handleOnChange(e)}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.nombre}
+							</Form.Control.Feedback>
 						</Form.Group>
+
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Apellido</Form.Label>
+							<Form.Label>Last Name</Form.Label>
 							<Form.Control
+								required
 								type='text'
-								placeholder='Ingrese el Apellido'
+								placeholder='Wexler'
+								name='apellido'
+								value={persona.apellido}
+								onChange={(e) => handleOnChange(e)}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.apellido}
+							</Form.Control.Feedback>
 						</Form.Group>
 					</Row>
 					<Row>
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Tipo de documento</Form.Label>
-							<Select options={tipoDocumento} />
+							<Form.Label>ID Type</Form.Label>
+							<Select
+								name='tipoDocumento'
+								options={tipoDocumento}
+								Searchable
+								Clearable
+								onChange={(e) =>
+									setPersona({
+										...persona,
+										docTipo: e.value,
+									})
+								}
+							/>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Nº Documento</Form.Label>
+							<Form.Label>ID Nº</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Ingrese el Nº Documento'
+								name='docNro'
+								value={persona.docNro}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 
@@ -109,32 +199,44 @@ export default function Personas() {
 							<Form.Label>Email</Form.Label>
 							<Form.Control
 								type='email'
-								placeholder='ejemplo@gmail.com'
+								placeholder='example@gmail.com'
+								name='mail'
+								value={persona.mail}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 					</Row>
 					<Row>
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Tel. Movil</Form.Label>
+							<Form.Label>Phone</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Ingrese el Tel. Movil'
+								name='telMovil'
+								value={persona.telMovil}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Tel. Personal</Form.Label>
+							<Form.Label>Personal Phone</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Ingrese el Tel. Personal'
+								name='telPersonal'
+								value={persona.telPersonal}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Tel. Laboral</Form.Label>
+							<Form.Label>Business Phone</Form.Label>
 							<Form.Control
 								type='text'
 								placeholder='Ingrese el Tel. Laboral'
+								name='telLaboral'
+								value={persona.telLaboral}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 					</Row>
@@ -144,63 +246,120 @@ export default function Personas() {
 							<Form.Control
 								type='text'
 								placeholder='Ingrese la url de su Linkedin'
+								name='linkedin'
+								value={persona.linkedin}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>CV</Form.Label>
-							<Form.Control type='file' />
+							<Form.Label>Resume</Form.Label>
+							<Form.Control
+								type='file'
+								name='cv'
+								value={persona.cv}
+								onChange={handleOnChange}
+							/>
 						</Form.Group>
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Persona tipo id</Form.Label>
 
-							<Select options={options} />
+							<Select
+								options={options}
+								Searchable
+								Clearable
+								onChange={(e) =>
+									setPersona({
+										...persona,
+										personaTipoId: e.value,
+									})
+								}
+							/>
 						</Form.Group>
 					</Row>
 				</fieldset>
-				<fieldset style={{ border: "3px solid" }}>
+				<fieldset style={{ border: "3px solid" }} className='px-2'>
 					<legend className='float-none w-auto p-2'>
-						Datos de Locación
+						Location Information
 					</legend>
 
 					<Row>
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Pais</Form.Label>
-							<Select options={pais} />
+							<Form.Label>Country</Form.Label>
+							<Select
+								options={pais}
+								Searchable
+								Clearable
+								onChange={(e) =>
+									setPersona({
+										...persona,
+										domPais: e.value,
+									})
+								}
+							/>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Provincia</Form.Label>
-							<Select options={provincia} />
+							<Form.Label>State / Province</Form.Label>
+							<Select
+								options={provincia}
+								Searchable
+								Clearable
+								onChange={(e) =>
+									setPersona({
+										...persona,
+										domProvincia: e.value,
+									})
+								}
+							/>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Localidad</Form.Label>
-							<Select options={localidad} />
+							<Form.Label>Depatment / Localidad</Form.Label>
+							<Select
+								options={localidad}
+								Searchable
+								Clearable
+								onChange={(e) =>
+									setPersona({
+										...persona,
+										domLocalidad: e.value,
+									})
+								}
+							/>
 						</Form.Group>
 					</Row>
 					<Row>
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Calle</Form.Label>
+							<Form.Label>Street</Form.Label>
 							<Form.Control
 								type='text'
-								placeholder='Nombre de la Calle'
+								placeholder='Florida'
+								name='domCalle'
+								value={persona.domCalle}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Altura</Form.Label>
+							<Form.Label>Street Nº</Form.Label>
 							<Form.Control
 								type='text'
-								placeholder='Altura de la calle'
+								placeholder='10327'
+								name='domAltura'
+								value={persona.domAltura}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>CP</Form.Label>
+							<Form.Label>PC</Form.Label>
 
 							<Form.Control
 								type='text'
-								placeholder='Codigo postal'
+								placeholder='Postal Code'
+								name='domCp'
+								value={persona.domCp}
+								onChange={handleOnChange}
 							/>
 						</Form.Group>
 					</Row>
@@ -208,11 +367,12 @@ export default function Personas() {
 				<div className='m-2 d-flex justify-content-end'>
 					<Button
 						type='submit'
+						disabled={Object.values(errors).length}
 						onClick={(e) => handleSubmit(e)}
 						className='btn btn-primary'>
-						<i className='fa fa-save'></i> Guardar
+						<i className='fa fa-save'></i> Save
 					</Button>
-					<Button className='btn btn-light'>Vovler al listado</Button>
+					<Button className='btn btn-light'>Go back</Button>
 				</div>
 			</Form>
 		</div>
