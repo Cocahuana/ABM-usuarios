@@ -10,10 +10,29 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 function validate(persona) {
-	let { nombre, apellido } = persona;
+	let {
+		nombre,
+		apellido,
+		docTipo,
+		docNro,
+		mail,
+		telMovil,
+		telPersonal,
+		telLaboral,
+		linkedin,
+		cv,
+		personaTipoId,
+		domCalle,
+		domAltura,
+		domLocalidad,
+		domProvincia,
+		domPais,
+		domCp,
+	} = persona;
 	let errors = {};
-	if (nombre.length != 7) errors.nombre = "Name must be 6";
+	if (nombre.length != 6) errors.nombre = "Name must be 6";
 	if (apellido.length !== 3) errors.apellido = "Last name must be 3";
+
 	return errors;
 }
 
@@ -103,15 +122,6 @@ export default function Personas() {
 		// Los selects no devuelven un name, por lo que el value del e.target
 		// se lo tenemos que asignar al value del key de nuestro useState
 
-		const validation = () => {
-			const form = e.currentTarget;
-			if (form.checkValidity() === false) {
-				e.preventDefault();
-				e.stopPropagation();
-			}
-			setValidated(true);
-		};
-		validation();
 		setPersona({
 			...persona,
 			[name]: value,
@@ -126,11 +136,7 @@ export default function Personas() {
 
 	return (
 		<div>
-			<Form
-				noValidate
-				validated={validated}
-				style={{ padding: "10px" }}
-				onSubmit={handleSubmit}>
+			<Form style={{ padding: "10px" }} onSubmit={handleSubmit}>
 				<fieldset style={{ border: "3px solid" }} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Personal Information
@@ -145,6 +151,8 @@ export default function Personas() {
 								name='nombre'
 								required
 								value={persona.nombre}
+								isInvalid={errors.nombre}
+								isValid={!errors.nombre}
 								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
@@ -155,11 +163,12 @@ export default function Personas() {
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Last Name</Form.Label>
 							<Form.Control
-								required
 								type='text'
 								placeholder='Wexler'
 								name='apellido'
 								value={persona.apellido}
+								isInvalid={errors.apellido}
+								isValid={!errors.apellido}
 								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
