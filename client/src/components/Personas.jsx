@@ -37,7 +37,6 @@ function validate(persona) {
 	const hasFirstUpper =
 		/^[A-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
 	const isEmail = /\S\@\S+\S+/; // Expresion Regular para validar Emails.
-	const oneTo100Parameter = /^[1-9]$|^[1-9][0-9]$|^(100)$/;
 	const hasOnlyDigits = /^\d+$/;
 
 	/* Nombre validations start */
@@ -60,7 +59,7 @@ function validate(persona) {
 	if (!isAlphabetical.test(apellido))
 		errors.apellido =
 			"Last name can not include special characters or being lower than 1 character";
-	if (nombre.length >= 45)
+	if (apellido.length >= 45)
 		errors.apellido = "Last name can not be longer to 45 characters";
 
 	/* docTipo validations start */
@@ -103,15 +102,48 @@ function validate(persona) {
 
 	if (telLaboral.length > 0) {
 		if (telLaboral.length <= 5 || telLaboral.length >= 20)
-			errors.telLaboral = "Phone must have between 5 and 20 numbers";
+			errors.telLaboral = "Phone must have between 5 and 20 digits";
 		if (!hasOnlyDigits.test(telLaboral))
 			errors.telLaboral = "Only numbers are allowed in this input";
 	}
 
 	/* cv validations start */
-	if (cv.length === 0) errors.cv = "Upload your Resume / CV";
+	if (cv.length === 0) errors.cv = "Please, upload your Resume / CV";
+
 	/* linkedin validations start */
-	// if (!isUrl.test(linkedin)) errors.linkedin = "Use a url format";
+
+	if (linkedin.length <= 5 || linkedin.length >= 100)
+		errors.linkedin = "Linkedin must have between 5 and 100 characters";
+	if (!linkedin) errors.linkedin = "Linkedin is required";
+
+	/* Street validations start */
+	if (domCalle.length > 0) {
+		if (!hasWhiteSpaces.test(domCalle))
+			errors.domCalle = "Street can not include whitespaces";
+		if (!hasFirstUpper.test(domCalle))
+			errors.domCalle = "Street should be Uppercase";
+		if (!isAlphabetical.test(domCalle))
+			errors.domCalle =
+				"Street can not include special characters or being lower than 1 character";
+		if (domCalle.length >= 45)
+			errors.domCalle = "Street can not be longer to 45 characters";
+	}
+	/* Street Nº validations start */
+	if (domAltura.length > 0) {
+		if (domAltura.length <= 1 || domAltura.length >= 5)
+			errors.domAltura =
+				"Street Nº must have between 1 and 5 digits. Example: 82, 159, 10581";
+		if (!hasOnlyDigits.test(domAltura))
+			errors.domAltura = "Only numbers are allowed in this input";
+	}
+	/* Postal Code validations start */
+	if (domCp.length > 0) {
+		if (domCp.length <= 1 || domCp.length >= 10)
+			errors.domCp =
+				"Street Nº must have between 1 and 10 digits. Example: 1600, 628";
+		if (!hasOnlyDigits.test(domCp))
+			errors.domCp = "Only numbers are allowed in this input";
+	}
 
 	return errors;
 }
@@ -462,8 +494,13 @@ export default function Personas() {
 								placeholder='Florida'
 								name='domCalle'
 								value={persona.domCalle}
+								isInvalid={errors.domCalle}
+								isValid={!errors.domCalle}
 								onChange={handleOnChange}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.domCalle}
+							</Form.Control.Feedback>
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
@@ -473,8 +510,13 @@ export default function Personas() {
 								placeholder='10327'
 								name='domAltura'
 								value={persona.domAltura}
+								isInvalid={errors.domAltura}
+								isValid={!errors.domAltura}
 								onChange={handleOnChange}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.domAltura}
+							</Form.Control.Feedback>
 						</Form.Group>
 						<Form.Group as={Col} className='mb-3'>
 							<Form.Label>Postal Code</Form.Label>
@@ -484,8 +526,13 @@ export default function Personas() {
 								placeholder='Postal Code'
 								name='domCp'
 								value={persona.domCp}
+								isInvalid={errors.domCp}
+								isValid={!errors.domCp}
 								onChange={handleOnChange}
 							/>
+							<Form.Control.Feedback type='invalid'>
+								{errors.domCp}
+							</Form.Control.Feedback>
 						</Form.Group>
 					</Row>
 				</fieldset>
