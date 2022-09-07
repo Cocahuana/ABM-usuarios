@@ -87,10 +87,14 @@ function validate(persona) {
 	if (!telMovil) errors.telMovil = "Phone is required";
 	if (!hasOnlyDigits.test(telMovil))
 		errors.telMovil = "Only numbers are allowed in this input";
+	if (telMovil.length <= 5 || telMovil.length >= 20)
+		errors.telMovil = "Phone must have between 5 and 20 numbers";
 
 	/* telPersonal validations start */
 
 	if (telPersonal.length > 0) {
+		if (telPersonal.length <= 5 || telPersonal.length >= 20)
+			errors.telPersonal = "Phone must have between 5 and 20 numbers";
 		if (!hasOnlyDigits.test(telPersonal))
 			errors.telPersonal = "Only numbers are allowed in this input";
 	}
@@ -98,6 +102,8 @@ function validate(persona) {
 	/* telLaboral validations start */
 
 	if (telLaboral.length > 0) {
+		if (telLaboral.length <= 5 || telLaboral.length >= 20)
+			errors.telLaboral = "Phone must have between 5 and 20 numbers";
 		if (!hasOnlyDigits.test(telLaboral))
 			errors.telLaboral = "Only numbers are allowed in this input";
 	}
