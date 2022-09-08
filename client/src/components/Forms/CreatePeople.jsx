@@ -252,6 +252,7 @@ export default function CreatePeople() {
 	return (
 		<div>
 			<Form className='p-4' onSubmit={handleSubmit}>
+				<h3>People</h3>
 				<fieldset style={{ border: "3px solid" }} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Personal Information
