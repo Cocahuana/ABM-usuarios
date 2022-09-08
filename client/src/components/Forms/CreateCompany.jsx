@@ -3,6 +3,7 @@ import { getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import Async, { useAsync } from "react-select/async";
+import { Link } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
@@ -544,7 +545,9 @@ export default function CreateCompany() {
 						className='btn btn-primary'>
 						<i className='fa fa-save'></i> Save
 					</Button>
-					<Button className='btn btn-light'>Go back</Button>
+					<Link to='/'>
+						<Button className='btn btn-light'>Go back</Button>
+					</Link>
 				</div>
 			</Form>
 		</div>
