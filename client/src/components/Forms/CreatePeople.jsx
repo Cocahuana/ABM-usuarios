@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getPersonas } from "../actions";
+import { getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import Async, { useAsync } from "react-select/async";
@@ -148,7 +148,7 @@ function validate(persona) {
 	return errors;
 }
 
-export default function Personas() {
+export default function CreatePeople() {
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
