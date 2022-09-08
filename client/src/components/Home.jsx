@@ -10,7 +10,7 @@ function Home() {
 					<button>Create New People</button>
 				</Link>
 				<h3>Company</h3>
-				<Link to='/Create/Company'>
+				<Link to='/Add/Company'>
 					<button>Create New Company</button>
 				</Link>
 			</div>

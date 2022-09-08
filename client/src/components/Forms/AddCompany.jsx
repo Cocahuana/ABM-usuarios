@@ -149,13 +149,12 @@ function validate(persona) {
 	return errors;
 }
 
-export default function CreateCompany() {
+export default function AddCompany() {
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
 	const [persona, setPersona] = useState({
 		nombre: "",
-		apellido: "",
 		docTipo: "",
 		docNro: "",
 		mail: "",
@@ -174,7 +173,6 @@ export default function CreateCompany() {
 	});
 
 	// const personas = useSelector((state) => state.personasInfo);
-	//DocTipo: D.N.I
 
 	useEffect(() => {
 		dispatch(getPersonas());
@@ -255,7 +253,7 @@ export default function CreateCompany() {
 				<h3>Company</h3>
 				<fieldset style={{ border: "3px solid" }} className='px-2'>
 					<legend className='float-none w-auto p-2'>
-						Personal Information
+						Company Information
 					</legend>
 					{/* <label>Persona Id</label> */}
 					<Row>
@@ -439,7 +437,7 @@ export default function CreateCompany() {
 				</fieldset>
 				<fieldset style={{ border: "3px solid" }} className='px-2'>
 					<legend className='float-none w-auto p-2'>
-						Location Information
+						Contact Information
 					</legend>
 
 					<Row>
