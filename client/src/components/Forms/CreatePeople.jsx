@@ -407,7 +407,7 @@ export default function CreatePeople() {
 						</Form.Group>
 
 						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Resume</Form.Label>
+							<Form.Label>Resume / CV</Form.Label>
 							<Form.Control
 								required
 								type='file'
@@ -541,7 +541,12 @@ export default function CreatePeople() {
 				<div className='m-2 d-flex justify-content-end'>
 					<Button
 						type='submit'
-						disabled={Object.values(errors).length}
+						disabled={
+							Object.values(errors).length === 0 &&
+							persona.nombre.length > 0
+								? false
+								: true
+						}
 						onClick={(e) => handleSubmit(e)}
 						className='btn btn-primary'>
 						<i className='fa fa-save'></i> Save
