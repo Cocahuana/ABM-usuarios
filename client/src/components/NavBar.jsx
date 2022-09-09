@@ -5,40 +5,37 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 function NavBar() {
+	// Dentro de NavDropdown.Item cuando usamos as={Link} to='/Alguna/ruta'
+	// estamos combinando React-Bootstrap con React-Router-Dom
 	return (
 		<Navbar collapseOnSelect expand='md' bg='dark' variant='dark'>
 			<Container>
-				<Link to='/'>
-					<Navbar.Brand>Company name</Navbar.Brand>
-				</Link>
+				<Navbar.Brand as={Link} to='/'>
+					Company name
+				</Navbar.Brand>
+
 				<Navbar.Toggle aria-controls='responsive-navbar-nav' />
 				<Navbar.Collapse id='responsive-navbar-nav'>
 					<Nav className='me-auto'>
-						<Nav.Link href='#features'>Features</Nav.Link>
-						<Nav.Link href='#pricing'>Pricing</Nav.Link>
-						<NavDropdown
-							title='Dropdown'
-							id='collasible-nav-dropdown'>
-							<NavDropdown.Item href='#action/3.1'>
-								Action
+						<NavDropdown title='Roles' id='collasible-nav-dropdown'>
+							<NavDropdown.Item as={Link} to='/Admin'>
+								Admin
 							</NavDropdown.Item>
-							<NavDropdown.Item href='#action/3.2'>
-								Another action
+							<NavDropdown.Item as={Link} to='/Candidate'>
+								Candidate
 							</NavDropdown.Item>
-							<NavDropdown.Item href='#action/3.3'>
-								Something
+
+							<NavDropdown.Item as={Link} to='/Client'>
+								Client
 							</NavDropdown.Item>
+
+							<NavDropdown.Item as={Link} to='/Recruiter'>
+								Recruiter
+							</NavDropdown.Item>
+
 							<NavDropdown.Divider />
-							<NavDropdown.Item href='#action/3.4'>
-								Separated link
-							</NavDropdown.Item>
+							<NavDropdown.Item>Separated link</NavDropdown.Item>
 						</NavDropdown>
-					</Nav>
-					<Nav>
-						<Nav.Link href='#deets'>More deets</Nav.Link>
-						<Nav.Link eventKey={2} href='#memes'>
-							Dank memes
-						</Nav.Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

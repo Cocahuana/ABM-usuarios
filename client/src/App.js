@@ -6,14 +6,14 @@ import Home from './components/Home';
 import NavBar from './components/NavBar';
 function App () {
   return (
-    <div className="App">
+    <>
       <NavBar />
       <Routes>
         <Route path="/" element={ <Home /> } />
-        <Route path="/Create/People" element={ <CreatePeople /> } />
-        <Route path="/Add/Company" element={ <AddCompany /> } />
+        <Route path="/Client" element={ <CreatePeople /> } />
+        <Route path="/Recruiter" element={ <AddCompany /> } />
       </Routes>
-    </div>
+    </>
   );
 }
 
