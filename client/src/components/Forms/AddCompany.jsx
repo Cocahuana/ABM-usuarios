@@ -126,9 +126,9 @@ export default function AddCompany() {
 
 	const options = [
 		{ value: 0, label: "Admin" },
-		{ value: 1, label: "Client" },
-		{ value: 2, label: "Recruiter" },
-		{ value: 3, label: "Candidate" },
+		{ value: 1, label: "Candidate" },
+		{ value: 2, label: "Client" },
+		{ value: 3, label: "Recruiter" },
 	];
 	const tipoDocumento = [
 		{ value: 1, label: "L.E / DNI" },
