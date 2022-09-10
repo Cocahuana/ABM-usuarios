@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { getcompanys } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import Async, { useAsync } from "react-select/async";
 import { Link } from "react-router-dom";
-import { Toast } from "react-bootstrap";
 
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
@@ -415,9 +412,9 @@ export default function AddCompany() {
 						className='btn btn-primary'>
 						<i className='fa fa-save'></i> Save
 					</Button>
-					<Link to='/'>
-						<Button className='btn btn-light'>Go back</Button>
-					</Link>
+					<Button as={Link} to='/Recruiter' className='btn btn-light'>
+						Go back
+					</Button>
 				</div>
 			</Form>
 		</div>
