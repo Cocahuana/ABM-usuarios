@@ -4,24 +4,22 @@ import { getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
-
-function Recruiters() {
+function Candidates() {
 	const dispatch = useDispatch();
 	const personas = useSelector((state) => state.personasInfo);
-	const tipoRecruiter = 2;
-	const recruiters = personas.filter(
-		(e) => e.PersonaTipo_Id === tipoRecruiter
+	const tipoCandidato = 3;
+	const candidatos = personas.filter(
+		(e) => e.PersonaTipo_Id === tipoCandidato
 	);
 	useEffect(() => {
 		dispatch(getPersonas());
 	}, [dispatch]);
-
 	return (
 		<>
-			<PeopleList personaTipo={recruiters} />
+			<PeopleList personaTipo={candidatos} />
 
-			<Button as={Link} to='/Recruiter/add' className='primary'>
-				Add Recruiter
+			<Button as={Link} to='/Candidate/add' className='primary'>
+				Add Candidate
 			</Button>
 			<Button as={Link} to='/' className='btn btn-light'>
 				Go back
@@ -30,4 +28,4 @@ function Recruiters() {
 	);
 }
 
-export default Recruiters;
+export default Candidates;

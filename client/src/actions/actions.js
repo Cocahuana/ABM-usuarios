@@ -1,1 +1,3 @@
 export const GET_PERSONAS = "GET_PERSONAS";
+export const DELETE_PERSONA = "DELETE_PERSONA";
+export const GET_PEOPLE_DETAIL = "GET_PEOPLE_DETAIL";

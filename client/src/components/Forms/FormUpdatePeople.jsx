@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { getPersonas } from "../../actions";
+import { getPersonaDetail, getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import Async, { useAsync } from "react-select/async";
 import { Link } from "react-router-dom";
-import BtnGoBack from "../BtnGoBack";
+import { useParams } from "react-router-dom";
+
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { validate } from "./PeopleValidation";
+import BtnGoBack from "../BtnGoBack";
 
-export default function CreatePeople() {
+function FormUpdatePeople(props) {
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
@@ -35,12 +37,48 @@ export default function CreatePeople() {
 		domCp: "",
 	});
 
-	// const personas = useSelector((state) => state.personasInfo);
-	//DocTipo: D.N.I
+	const personaDetalle = useSelector((state) => state.personaDetalle);
 
+	const { id } = useParams();
 	useEffect(() => {
-		dispatch(getPersonas());
-	}, [dispatch]);
+		dispatch(getPersonaDetail(id));
+		defineStates();
+	}, [dispatch, id]);
+
+	const defineStates = () => {
+		persona.nombre = personaDetalle.nombre;
+		persona.apellido = personaDetalle.apellido;
+		persona.docTipo = personaDetalle.docTipo;
+		persona.docNro = personaDetalle.docNro;
+		persona.mail = personaDetalle.mail;
+		persona.telMovil = personaDetalle.telMovil;
+		persona.telPersonal = personaDetalle.telPersonal;
+		persona.telLaboral = personaDetalle.telLaboral;
+		persona.linkedin = personaDetalle.linkedin;
+		persona.personaTipoId = personaDetalle.personaTipoId;
+		persona.domCalle = personaDetalle.domCalle;
+		persona.domAltura = personaDetalle.domAltura;
+		persona.domLocalidad = personaDetalle.domLocalidad;
+		persona.domProvincia = personaDetalle.domProvincia;
+		persona.domPais = personaDetalle.domPais;
+		persona.domCp = personaDetalle.domCp;
+	};
+
+	let personaTipoIdString;
+	switch (personaDetalle.personaTipoId) {
+		case 0:
+			personaTipoIdString = "Admin";
+			break;
+		case 1:
+			personaTipoIdString = "Candidate";
+			break;
+		case 2:
+			personaTipoIdString = "Client";
+			break;
+		case 3:
+			personaTipoIdString = "Recruiter";
+			break;
+	}
 
 	const options = [
 		{ value: 0, label: "Admin" },
@@ -72,25 +110,6 @@ export default function CreatePeople() {
 	function handleSubmit(e) {
 		e.preventDefault();
 		console.log(persona);
-		setPersona({
-			nombre: "",
-			apellido: "",
-			docTipo: "",
-			docNro: "",
-			mail: "",
-			telMovil: "",
-			telPersonal: "",
-			telLaboral: "",
-			linkedin: "",
-			cv: "",
-			personaTipoId: "",
-			domCalle: "",
-			domAltura: "",
-			domLocalidad: "",
-			domProvincia: "",
-			domPais: "",
-			domCp: "",
-		});
 	}
 
 	function handleOnChange(e) {
@@ -112,9 +131,9 @@ export default function CreatePeople() {
 	}
 
 	return (
-		<div>
+		<>
 			<Form className='p-4' onSubmit={handleSubmit}>
-				<h3>Some People Type</h3>
+				<h3>{personaTipoIdString}</h3>
 				<fieldset style={{ border: "3px solid" }} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Personal Information
@@ -416,6 +435,7 @@ export default function CreatePeople() {
 					<BtnGoBack />
 				</div>
 			</Form>
-		</div>
+		</>
 	);
 }
+export default FormUpdatePeople;
