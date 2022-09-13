@@ -1,7 +1,6 @@
 import React from "react";
 import Persona from "./Forms/Persona";
 import { Table } from "react-bootstrap";
-
 function PeopleList(props) {
 	const { personaTipo } = props;
 	return (

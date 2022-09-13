@@ -4,6 +4,7 @@ import { getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
+import SearchBar from "../SearchBar";
 
 function Admin() {
 	const dispatch = useDispatch();
@@ -15,6 +16,8 @@ function Admin() {
 	}, [dispatch]);
 	return (
 		<>
+			<SearchBar personaTipoId={tipoAdmin} />
+
 			<PeopleList personaTipo={admins} />
 
 			<Button as={Link} to='/Admin/add' className='primary'>

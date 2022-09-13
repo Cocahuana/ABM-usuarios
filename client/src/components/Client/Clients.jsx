@@ -4,16 +4,20 @@ import { getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
+import SearchBar from "../SearchBar";
+
 function Clients() {
 	const dispatch = useDispatch();
 	const personas = useSelector((state) => state.personasInfo);
-	const tipoCliente = 1;
+	const tipoCliente = 2;
 	const cliente = personas.filter((e) => e.PersonaTipo_Id === tipoCliente);
 	useEffect(() => {
 		dispatch(getPersonas());
 	}, [dispatch]);
 	return (
 		<>
+			<SearchBar personaTipoId={tipoCliente} />
+
 			<PeopleList personaTipo={cliente} />
 
 			<Button as={Link} to='/Client/add' className='primary'>

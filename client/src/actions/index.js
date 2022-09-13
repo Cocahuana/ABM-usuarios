@@ -1,4 +1,4 @@
-import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL } from './actions'
+import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME } from './actions'
 import json from '../utils/personas.json';
 import axios from 'axios';
 // const endpoint = "http://yamana.somee.com/api/usuarios";
@@ -93,4 +93,22 @@ export function getPersonaDetail ( id ) {
             console.log( error );
         }
     }
+}
+export function getPeopleByName ( name, personaTipoId ) {
+    return async function ( dispatch ) {
+        try
+        {
+            // var json = await axios.get( `/getRecipes?title=` + title );
+            let filteredPeople = json.Personas.filter( ( e ) => e.PersonaTipo_Id == personaTipoId );
+            let result = filteredPeople.filter( ( e ) => e.Nombre.toLowerCase() === name.toLowerCase() )
+            return dispatch( {
+                type: GET_PEOPLE_BY_NAME,
+                //json.data devuelve lo que nos da la ruta de arriba, ya filtrado por nombre
+                payload: result,
+            } );
+        } catch ( error )
+        {
+            console.log( error );
+        }
+    };
 }

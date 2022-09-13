@@ -122,6 +122,7 @@ function FormUpdatePeople(props) {
 			...persona,
 			[name]: value,
 		});
+
 		setErrors(
 			validate({
 				...persona,
