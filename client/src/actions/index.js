@@ -1,4 +1,4 @@
-import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME } from './actions'
+import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME } from './actions'
 import json from '../utils/personas.json';
 import axios from 'axios';
 // const endpoint = "http://yamana.somee.com/api/usuarios";
@@ -110,5 +110,12 @@ export function getPeopleByName ( name, personaTipoId ) {
         {
             console.log( error );
         }
+    };
+}
+
+export function orderByFirstName ( payload ) {
+    return {
+        type: ORDER_BY_FIRST_NAME,
+        payload,
     };
 }

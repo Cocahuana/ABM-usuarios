@@ -8,12 +8,15 @@ import SearchBar from "../SearchBar";
 
 function Admin() {
 	const dispatch = useDispatch();
-	const personas = useSelector((state) => state.personasInfo);
+	const { personasInfo } = useSelector((state) => state);
+
 	const tipoAdmin = 0;
-	const admins = personas.filter((e) => e.PersonaTipo_Id === tipoAdmin);
+	let admins = personasInfo.filter((e) => e.PersonaTipo_Id === tipoAdmin);
+
 	useEffect(() => {
 		dispatch(getPersonas());
 	}, [dispatch]);
+
 	return (
 		<>
 			<SearchBar personaTipoId={tipoAdmin} />

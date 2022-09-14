@@ -1,4 +1,4 @@
-import { GET_PERSONAS, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME } from "../actions/actions";
+import { GET_PERSONAS, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME } from "../actions/actions";
 const initialState = {
     personasInfo: [],
     personaDetalle: [],
@@ -25,6 +25,35 @@ function rootReducer ( state = initialState, action ) {
             return {
                 ...state,
                 personasInfo: action.payload,
+            }
+        case ORDER_BY_FIRST_NAME:
+            let sortedName = action.payload === 'ascendente' ?
+                state.personasInfo.sort( function ( a, b ) {
+
+                    if ( a.Nombre > b.Nombre )
+                    {
+                        return 1;
+                    }
+                    if ( b.Nombre > a.Nombre )
+                    {
+                        return -1;
+                    }
+                    return 0;
+                } ) :
+                state.personasInfo.sort( function ( a, b ) {
+                    if ( a.Nombre > b.Nombre )
+                    {
+                        return -1;
+                    }
+                    if ( b.Nombre > a.Nombre )
+                    {
+                        return 1;
+                    }
+                    return 0;
+                } );
+            return {
+                ...state,
+                personasInfo: sortedName
             }
         default:
             return state;
