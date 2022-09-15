@@ -8,7 +8,7 @@ import SearchBar from "../SearchBar";
 
 function Admin() {
 	const dispatch = useDispatch();
-	const { personasInfo } = useSelector((state) => state);
+	let { personasInfo } = useSelector((state) => state);
 
 	const tipoAdmin = 0;
 	let admins = personasInfo.filter((e) => e.PersonaTipo_Id === tipoAdmin);

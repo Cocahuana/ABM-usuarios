@@ -7,9 +7,9 @@ import PeopleList from "../PeopleList";
 import SearchBar from "../SearchBar";
 function Recruiters() {
 	const dispatch = useDispatch();
-	const personas = useSelector((state) => state.personasInfo);
+	const { personasInfo } = useSelector((state) => state);
 	const tipoRecruiter = 3;
-	const recruiters = personas.filter(
+	const recruiters = personasInfo.filter(
 		(e) => e.PersonaTipo_Id === tipoRecruiter
 	);
 	useEffect(() => {

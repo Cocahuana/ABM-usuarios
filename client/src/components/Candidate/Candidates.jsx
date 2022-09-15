@@ -8,9 +8,9 @@ import SearchBar from "../SearchBar";
 
 function Candidates() {
 	const dispatch = useDispatch();
-	const personas = useSelector((state) => state.personasInfo);
+	const { personasInfo } = useSelector((state) => state);
 	const tipoCandidato = 1;
-	const candidatos = personas.filter(
+	const candidatos = personasInfo.filter(
 		(e) => e.PersonaTipo_Id === tipoCandidato
 	);
 	useEffect(() => {

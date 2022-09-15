@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import Persona from "./Forms/Persona";
-import { Table } from "react-bootstrap";
+import { Table, Stack, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { orderByFirstName, getPersonas } from "../actions";
-import { Button } from "react-bootstrap";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa";
+
 function PeopleList(props) {
-	const { personaTipo } = props;
+	let { personaTipo } = props;
 	const dispatch = useDispatch();
 
 	function handleSortFirstName(e) {
@@ -22,24 +23,26 @@ function PeopleList(props) {
 						<tr>
 							<th>#</th>
 							<th>
-								First Name{" "}
 								{
-									<>
+									<Stack direction='horizontal' gap={2}>
+										First Name{" "}
 										<Button
+											type='button'
 											onClick={(e) =>
 												handleSortFirstName(e)
 											}
 											value='ascendente'>
-											Up
+											<FaSortAlphaUp />
 										</Button>
 										<Button
+											type='button'
 											onClick={(e) =>
 												handleSortFirstName(e)
 											}
 											value='descendente'>
-											Down
+											<FaSortAlphaDown />
 										</Button>
-									</>
+									</Stack>
 								}
 							</th>
 							<th>Last Name</th>

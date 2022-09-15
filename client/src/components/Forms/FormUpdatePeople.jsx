@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getPersonaDetail, getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
@@ -17,6 +17,7 @@ function FormUpdatePeople(props) {
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
+	// const [editFormData, setEditFormData]
 	const [persona, setPersona] = useState({
 		nombre: "",
 		apellido: "",
@@ -37,31 +38,41 @@ function FormUpdatePeople(props) {
 		domCp: "",
 	});
 
-	const personaDetalle = useSelector((state) => state.personaDetalle);
+	const { personaDetalle } = useSelector((state) => state);
 
 	const { id } = useParams();
 	useEffect(() => {
+		// dispatch(getPersonaDetail(id)).then((response) => {
+		// 	defineStates();
+		// });
 		dispatch(getPersonaDetail(id));
-		defineStates();
 	}, [dispatch, id]);
 
-	const defineStates = () => {
-		persona.nombre = personaDetalle.nombre;
-		persona.apellido = personaDetalle.apellido;
-		persona.docTipo = personaDetalle.docTipo;
-		persona.docNro = personaDetalle.docNro;
-		persona.mail = personaDetalle.mail;
-		persona.telMovil = personaDetalle.telMovil;
-		persona.telPersonal = personaDetalle.telPersonal;
-		persona.telLaboral = personaDetalle.telLaboral;
-		persona.linkedin = personaDetalle.linkedin;
-		persona.personaTipoId = personaDetalle.personaTipoId;
-		persona.domCalle = personaDetalle.domCalle;
-		persona.domAltura = personaDetalle.domAltura;
-		persona.domLocalidad = personaDetalle.domLocalidad;
-		persona.domProvincia = personaDetalle.domProvincia;
-		persona.domPais = personaDetalle.domPais;
-		persona.domCp = personaDetalle.domCp;
+	const defineStates = (e) => {
+		e.preventDefault();
+		setPersona({
+			...persona,
+			nombre: personaDetalle.nombre,
+			apellido: personaDetalle.apellido,
+			docTipo: personaDetalle.docTipo,
+			telPersonal: personaDetalle.telPersonal,
+		});
+		// persona.nombre = personaDetalle.nombre;
+		// persona.apellido = personaDetalle.apellido;
+		// persona.docTipo = personaDetalle.docTipo;
+		// persona.docNro = personaDetalle.docNro;
+		// persona.mail = personaDetalle.mail;
+		// persona.telMovil = personaDetalle.telMovil;
+		// persona.telPersonal = personaDetalle.telPersonal;
+		// persona.telLaboral = personaDetalle.telLaboral;
+		// persona.linkedin = personaDetalle.linkedin;
+		// persona.personaTipoId = personaDetalle.personaTipoId;
+		// persona.domCalle = personaDetalle.domCalle;
+		// persona.domAltura = personaDetalle.domAltura;
+		// persona.domLocalidad = personaDetalle.domLocalidad;
+		// persona.domProvincia = personaDetalle.domProvincia;
+		// persona.domPais = personaDetalle.domPais;
+		// persona.domCp = personaDetalle.domCp;
 	};
 
 	let personaTipoIdString;
@@ -117,7 +128,6 @@ function FormUpdatePeople(props) {
 
 		// Los selects no devuelven un name, por lo que el value del e.target
 		// se lo tenemos que asignar al value del key de nuestro useState
-
 		setPersona({
 			...persona,
 			[name]: value,
@@ -133,6 +143,7 @@ function FormUpdatePeople(props) {
 
 	return (
 		<>
+			<Button onClick={(e) => defineStates(e)}>seteable</Button>
 			<Form className='p-4' onSubmit={handleSubmit}>
 				<h3>{personaTipoIdString}</h3>
 				<fieldset style={{ border: "3px solid" }} className='px-2'>
@@ -199,7 +210,7 @@ function FormUpdatePeople(props) {
 								value={persona.docNro}
 								isInvalid={errors.docNro}
 								isValid={!errors.docNro}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.docNro}
@@ -215,7 +226,7 @@ function FormUpdatePeople(props) {
 								value={persona.mail}
 								isInvalid={errors.mail}
 								isValid={!errors.mail}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.mail}
@@ -248,7 +259,7 @@ function FormUpdatePeople(props) {
 								value={persona.telPersonal}
 								isInvalid={errors.telPersonal}
 								isValid={!errors.telPersonal}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.telPersonal}
@@ -264,7 +275,7 @@ function FormUpdatePeople(props) {
 								value={persona.telLaboral}
 								isInvalid={errors.telLaboral}
 								isValid={!errors.telLaboral}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.telLaboral}
@@ -281,7 +292,7 @@ function FormUpdatePeople(props) {
 								value={persona.linkedin}
 								isInvalid={errors.linkedin}
 								isValid={!errors.linkedin}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.linkedin}
@@ -297,7 +308,7 @@ function FormUpdatePeople(props) {
 								value={persona.cv}
 								isInvalid={errors.cv}
 								isValid={!errors.cv}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.cv}
@@ -380,7 +391,7 @@ function FormUpdatePeople(props) {
 								value={persona.domCalle}
 								isInvalid={errors.domCalle}
 								isValid={!errors.domCalle}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.domCalle}
@@ -396,7 +407,7 @@ function FormUpdatePeople(props) {
 								value={persona.domAltura}
 								isInvalid={errors.domAltura}
 								isValid={!errors.domAltura}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.domAltura}
@@ -412,7 +423,7 @@ function FormUpdatePeople(props) {
 								value={persona.domCp}
 								isInvalid={errors.domCp}
 								isValid={!errors.domCp}
-								onChange={handleOnChange}
+								onChange={(e) => handleOnChange(e)}
 							/>
 							<Form.Control.Feedback type='invalid'>
 								{errors.domCp}
@@ -423,12 +434,6 @@ function FormUpdatePeople(props) {
 				<div className='m-2 d-flex justify-content-end'>
 					<Button
 						type='submit'
-						disabled={
-							Object.values(errors).length === 0 &&
-							persona.nombre.length > 0
-								? false
-								: true
-						}
 						onClick={(e) => handleSubmit(e)}
 						className='btn btn-primary'>
 						<i className='fa fa-save'></i> Save

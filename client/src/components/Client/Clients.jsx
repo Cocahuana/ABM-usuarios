@@ -8,9 +8,11 @@ import SearchBar from "../SearchBar";
 
 function Clients() {
 	const dispatch = useDispatch();
-	const personas = useSelector((state) => state.personasInfo);
+	const { personasInfo } = useSelector((state) => state);
 	const tipoCliente = 2;
-	const cliente = personas.filter((e) => e.PersonaTipo_Id === tipoCliente);
+	const cliente = personasInfo.filter(
+		(e) => e.PersonaTipo_Id === tipoCliente
+	);
 	useEffect(() => {
 		dispatch(getPersonas());
 	}, [dispatch]);

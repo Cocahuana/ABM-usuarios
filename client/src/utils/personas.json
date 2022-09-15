@@ -84,7 +84,7 @@
 			"Persona_Id": 5,
 			"Nombre": "Tom",
 			"Apellido": "Recruiter",
-			"DocTipo": 80,
+			"DocTipo": 1,
 			"DocNro": "651125",
 			"mail": "soyMail@mail.com",
 			"TelMovil": "888-8888",
