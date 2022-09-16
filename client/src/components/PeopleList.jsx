@@ -53,25 +53,25 @@ function PeopleList(props) {
 					<tbody>
 						{personaTipo?.map((e) => (
 							<Persona
-								key={e.Persona_Id}
-								persona_Id={e.Persona_Id}
-								nombre={e.Nombre}
-								apellido={e.Apellido}
-								docTipo={e.DocTipo}
-								docNro={e.DocNro}
+								key={e.personaId}
+								persona_Id={e.personaId}
+								nombre={e.nombre}
+								apellido={e.apellido}
+								docTipo={e.docTipo}
+								docNro={e.docNro}
 								mail={e.mail}
-								telMovil={e.TelMovil}
-								telPersonal={e.TelPersonal}
-								telLaboral={e.TelLaboral}
-								linkedin={e.Linkedin}
-								cv={e.CV}
-								personaTipo_Id={e.PersonaTipo_Id}
-								domCalle={e.DomCalle}
-								domAltura={e.DomAltura}
-								domLocalidad={e.DomLocalidad}
-								domProvincia={e.DomProvincia}
-								domPais={e.DomPais}
-								domCp={e.DomCP}
+								telMovil={e.telMovil}
+								telPersonal={e.telPersonal}
+								telLaboral={e.telLaboral}
+								linkedin={e.linkedin}
+								cv={e.cv}
+								personaTipo_Id={e.personaTipoId}
+								domCalle={e.domCalle}
+								domAltura={e.domAltura}
+								domLocalidad={e.domLocalidad}
+								domProvincia={e.domProvincia}
+								domPais={e.domPais}
+								domCp={e.domCP}
 							/>
 						))}
 					</tbody>

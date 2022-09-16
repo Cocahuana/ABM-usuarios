@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { getPersonaDetail, getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import Async, { useAsync } from "react-select/async";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
@@ -16,8 +15,7 @@ import BtnGoBack from "../BtnGoBack";
 function FormUpdatePeople() {
 	const dispatch = useDispatch();
 	const [errors, setErrors] = useState({});
-	const [validated, setValidated] = useState(false);
-	const [time, setTime] = useState(false);
+	const [flagCargaPersona, setFlagCargaPersona] = useState(false);
 	// const [editFormData, setEditFormData]
 	const [persona, setPersona] = useState({
 		nombre: "",
@@ -43,14 +41,8 @@ function FormUpdatePeople() {
 
 	const { id } = useParams();
 	useEffect(() => {
-		dispatch(getPersonaDetail(id));
-		if (personaDetalle) {
-			setTime(true);
-			if (time === true) {
-				defineSetPersona();
-			}
-		}
-	}, [dispatch, id, time]);
+		asyncLoadOfPerson();
+	}, [dispatch, id, flagCargaPersona]);
 
 	const defineSetPersona = () => {
 		setPersona({
@@ -58,12 +50,19 @@ function FormUpdatePeople() {
 			nombre: personaDetalle.nombre,
 			apellido: personaDetalle.apellido,
 			docTipo: personaDetalle.docTipo,
-			telPersonal: personaDetalle.telPersonal,
 			docNro: personaDetalle.docNro,
 			mail: personaDetalle.mail,
 			telMovil: personaDetalle.telMovil,
-			telLaboral: personaDetalle.telLaboral,
-			linkedin: personaDetalle.linkedin,
+			telPersonal:
+				personaDetalle.telPersonal === null
+					? ""
+					: personaDetalle.telPersonal,
+			telLaboral:
+				personaDetalle.telLaboral === null
+					? ""
+					: personaDetalle.telLaboral,
+			linkedin:
+				personaDetalle.linkedin === null ? "" : personaDetalle.linkedin,
 			personaTipoId: personaDetalle.personaTipoId,
 			domCalle: personaDetalle.domCalle,
 			domAltura: personaDetalle.domAltura,
@@ -72,6 +71,21 @@ function FormUpdatePeople() {
 			domPais: personaDetalle.domPais,
 			domCp: personaDetalle.domCp,
 		});
+	};
+
+	const asyncLoadOfPerson = async () => {
+		await dispatch(getPersonaDetail(id));
+		if (personaDetalle) {
+			setFlagCargaPersona(true);
+			if (flagCargaPersona === true) {
+				// Para precargar el formulario sin re-renderizar react, se setean los datos en un estado local activado por un flag:
+				//el flag indica si le llego la data del usuario, si llegó entra y setea por unica vez los datos del usuario, sino,
+				//muestra una pantalla de carga
+				defineSetPersona();
+			}
+		} else {
+			console.log("Qliao");
+		}
 	};
 
 	let personaTipoIdString;
@@ -96,25 +110,29 @@ function FormUpdatePeople() {
 		{ value: 2, label: "Recruiter" },
 		{ value: 3, label: "Candidate" },
 	];
-	const tipoDocumento = [
-		{ value: 1, label: "L.E / DNI" },
-		{ value: 4, label: "Carnet de Extranjeria" },
-		{ value: 7, label: "Pasaporte" },
+	let tipoDocumento = [
+		{ value: 0, label: "Driver Licence / ID" },
+		{
+			value: 1,
+			label: "Passport",
+		},
 	];
 	const pais = [
-		{ value: "argentina", label: "Argentina" },
-		{ value: "peru", label: "perú" },
-		{ value: "chile", label: "Chile" },
+		{ value: "Netherland", label: "Netherland" },
+		{ value: "Argentina", label: "Argentina" },
+		{ value: "Chile", label: "Chile" },
 	];
 	const provincia = [
 		{ value: "caba", label: "CABA" },
-		{ value: "buenos aires", label: "Buenos Aires" },
+		{ value: "Buenos Aires", label: "Buenos Aires" },
 		{ value: "cordoba", label: "Cordoba" },
 	];
 	const localidad = [
 		{ value: "palermo", label: "Palermo" },
 		{ value: "villa urquiza", label: "Villa Urquiza" },
 		{ value: "avellaneda", label: "Avellaneda" },
+		{ value: "Padua", label: "Padua" },
+		{ value: "CABA", label: "CABA" },
 	];
 
 	function handleSubmit(e) {
@@ -140,9 +158,16 @@ function FormUpdatePeople() {
 		);
 	}
 
+	const searchPlaceForOption = (placeData, personaValue) => {
+		return placeData.filter(
+			(option) =>
+				option.value.toLowerCase() === personaValue.toLowerCase()
+		);
+	};
+
 	return (
 		<>
-			{time === true ? (
+			{flagCargaPersona === true ? (
 				<>
 					<Form className='p-4' onSubmit={handleSubmit}>
 						<h3>{personaTipoIdString}</h3>
@@ -190,9 +215,21 @@ function FormUpdatePeople() {
 							<Row>
 								<Form.Group as={Col} className='mb-3'>
 									<Form.Label>ID Type</Form.Label>
+
 									<Select
 										name='tipoDocumento'
 										options={tipoDocumento}
+										defaultValue={
+											persona.docTipo === 1
+												? {
+														value: 0,
+														label: "Driver Licence / ID",
+												  }
+												: {
+														value: 1,
+														label: "Passport",
+												  }
+										}
 										Searchable
 										onChange={(e) =>
 											setPersona({
@@ -343,9 +380,13 @@ function FormUpdatePeople() {
 								<Form.Group as={Col} className='mb-3'>
 									<Form.Label>Country</Form.Label>
 									<Select
+										name='domPais'
 										options={pais}
+										value={searchPlaceForOption(
+											pais,
+											persona.domPais
+										)}
 										Searchable
-										Clearable
 										onChange={(e) =>
 											setPersona({
 												...persona,
@@ -358,7 +399,12 @@ function FormUpdatePeople() {
 								<Form.Group as={Col} className='mb-3'>
 									<Form.Label>State / Province</Form.Label>
 									<Select
+										name='domProvincia'
 										options={provincia}
+										value={searchPlaceForOption(
+											provincia,
+											persona.domProvincia
+										)}
 										Searchable
 										Clearable
 										onChange={(e) =>
@@ -375,7 +421,12 @@ function FormUpdatePeople() {
 										Depatment / Localidad
 									</Form.Label>
 									<Select
+										name='domLocalidad'
 										options={localidad}
+										value={searchPlaceForOption(
+											localidad,
+											persona.domLocalidad
+										)}
 										Searchable
 										Clearable
 										onChange={(e) =>

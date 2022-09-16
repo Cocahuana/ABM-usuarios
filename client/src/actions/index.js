@@ -1,21 +1,79 @@
 import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME } from './actions'
 import json from '../utils/personas.json';
 import axios from 'axios';
-// const endpoint = "http://yamana.somee.com/api/usuarios";
+const endpointGetPersonasFromApi = "http://yamana.somee.com/api/personas";
 // const personasJson = '../../utils/personas.json';
 
-
+const adapterPeopleFromApi = ( people ) => {
+    // El adapter o interfaz separa la forma en la que se trabajan los datos desde el back hacia el front. 
+    // De esta forma, si la forma en que los datos llegan desde el back cambian, 
+    // no nos rompe toda la app ya que trabajamos los objetos con nombres de propiedades fijos
+    let newPeople = people.map( ( people ) => {
+        return {
+            personaId: people.personaId,
+            nombre: people.nombre,
+            apellido: people.apellido,
+            docTipo: people.docTipo,
+            docNro: people.docNro,
+            mail: people.mail,
+            telMovil: people.telMovil,
+            telPersonal: people.telPersonal,
+            telLaboral: people.telLaboral,
+            linkedin: people.linkedin,
+            cv: people.cv,
+            personaTipoId: people.personaTipoId,
+            domCalle: people.domCalle,
+            domAltura: people.domAltura,
+            domLocalidad: people.domLocalidad,
+            domProvincia: people.domProvincia,
+            domPais: people.domPais,
+            domCp: people.domCp,
+            candidatos: people.candidatos,
+            empresas: people.empresas,
+            mensajeDestinos: people.mensajeDestinos,
+            mensajeOrigenes: people.mensajeOrigens,
+        }
+    } )
+    return newPeople
+}
+const adapterPersonFromApi = ( people ) => {
+    let newPeople = {
+        personaId: people.personaId,
+        nombre: people.nombre,
+        apellido: people.apellido,
+        docTipo: people.docTipo,
+        docNro: people.docNro,
+        mail: people.mail,
+        telMovil: people.telMovil,
+        telPersonal: people.telPersonal,
+        telLaboral: people.telLaboral,
+        linkedin: people.linkedin,
+        cv: people.cv,
+        personaTipoId: people.personaTipoId,
+        domCalle: people.domCalle,
+        domAltura: people.domAltura,
+        domLocalidad: people.domLocalidad,
+        domProvincia: people.domProvincia,
+        domPais: people.domPais,
+        domCp: people.domCp,
+        candidatos: people.candidatos,
+        empresas: people.empresas,
+        mensajeDestinos: people.mensajeDestinos,
+        mensajeOrigenes: people.mensajeOrigens,
+    }
+    return newPeople
+}
 
 export function getPersonas () {
     return async function ( dispatch ) {
         try
         {
-            // let personasInfo = await axios.get( json );
-            let personasInfo = json.Personas;
-            // console.log( personasInfo );
+            let peopleFromApi = await axios.get( endpointGetPersonasFromApi );
+            let formattedPeople = adapterPeopleFromApi( peopleFromApi.data );
+            // let personasInfo = json.Personas;
             return dispatch( {
                 type: GET_PERSONAS,
-                payload: personasInfo
+                payload: formattedPeople
             } )
         }
         catch ( error )
@@ -30,6 +88,8 @@ export function deleteUserById ( id ) {
         try
         {
             console.log( id );
+            let deletePerson = await axios.delete( endpointGetPersonasFromApi + `/${ id }` );
+            console.log( "Person eliminated successfully" )
             // let usersInfo = await axios.delete( `http://localhost:3001/users/${ id }` );
             // return dispatch( {
             //     type: DELETE_USER_BY_ID,
@@ -48,7 +108,10 @@ export function updatePeopleById ( payload ) {
         {
             console.log( "Updated People: ", payload )
             // await axios.put( `http://localhost:3001/users/${ payload.usuarioId }`, payload );
+            let personFromApi = await axios.put( endpointGetPersonasFromApi + `/${ payload.personaId }`, payload );
+
         }
+
         catch ( error )
         {
             console.log( error );
@@ -60,32 +123,14 @@ export function getPersonaDetail ( id ) {
     return async function ( dispatch ) {
         try
         {
-            let foundPerson = json.Personas.find( ( e ) => e.Persona_Id == id );
+            let personFromApi = await axios.get( endpointGetPersonasFromApi + `/${ id }` );
+            let formattedPerson = adapterPersonFromApi( personFromApi.data );
 
-            let newPersona = {
-                personaId: foundPerson.Persona_Id,
-                nombre: foundPerson.Nombre,
-                apellido: foundPerson.Apellido,
-                docTipo: foundPerson.DocTipo,
-                docNro: foundPerson.DocNro,
-                mail: foundPerson.mail,
-                telMovil: foundPerson.TelMovil,
-                telPersonal: foundPerson.TelPersonal,
-                telLaboral: foundPerson.TelLaboral,
-                linkedin: foundPerson.Linkedin,
-                cv: foundPerson.CV,
-                personaTipoId: foundPerson.PersonaTipo_Id,
-                domCalle: foundPerson.DomCalle,
-                domAltura: foundPerson.DomAltura,
-                domLocalidad: foundPerson.DomLocalidad,
-                domProvincia: foundPerson.DomProvincia,
-                domPais: foundPerson.DomPais,
-                domCp: foundPerson.DomCP,
-            }
+            //let foundPerson = json.Personas.find( ( e ) => e.Persona_Id == id );
 
             return dispatch( {
                 type: GET_PEOPLE_DETAIL,
-                payload: newPersona
+                payload: formattedPerson
             } )
         }
         catch ( error )

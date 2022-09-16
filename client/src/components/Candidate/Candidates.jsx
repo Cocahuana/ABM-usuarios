@@ -11,7 +11,7 @@ function Candidates() {
 	const { personasInfo } = useSelector((state) => state);
 	const tipoCandidato = 1;
 	const candidatos = personasInfo.filter(
-		(e) => e.PersonaTipo_Id === tipoCandidato
+		(e) => e.personaTipoId === tipoCandidato
 	);
 	useEffect(() => {
 		dispatch(getPersonas());

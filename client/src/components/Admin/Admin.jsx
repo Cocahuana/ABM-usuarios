@@ -11,7 +11,7 @@ function Admin() {
 	let { personasInfo } = useSelector((state) => state);
 
 	const tipoAdmin = 0;
-	let admins = personasInfo.filter((e) => e.PersonaTipo_Id === tipoAdmin);
+	let admins = personasInfo.filter((e) => e.personaTipoId === tipoAdmin);
 
 	useEffect(() => {
 		dispatch(getPersonas());
