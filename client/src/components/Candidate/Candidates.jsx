@@ -6,19 +6,19 @@ import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
 import SearchBar from "../SearchBar";
 
-function Candidates() {
+function Candidates({ personTypeId }) {
 	const dispatch = useDispatch();
 	const { personasInfo } = useSelector((state) => state);
-	const tipoCandidato = 1;
+
 	const candidatos = personasInfo.filter(
-		(e) => e.personaTipoId === tipoCandidato
+		(e) => e.personaTipoId === personTypeId
 	);
 	useEffect(() => {
 		dispatch(getPersonas());
 	}, [dispatch]);
 	return (
 		<>
-			<SearchBar personaTipoId={tipoCandidato} />
+			<SearchBar personaTipoId={personTypeId} />
 
 			<PeopleList personaTipo={candidatos} />
 

@@ -6,12 +6,11 @@ import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
 import SearchBar from "../SearchBar";
 
-function Admin() {
+function Admin({ personTypeId }) {
 	const dispatch = useDispatch();
 	let { personasInfo } = useSelector((state) => state);
 
-	const tipoAdmin = 0;
-	let admins = personasInfo.filter((e) => e.personaTipoId === tipoAdmin);
+	let admins = personasInfo.filter((e) => e.personaTipoId === personTypeId);
 
 	useEffect(() => {
 		dispatch(getPersonas());
@@ -19,7 +18,7 @@ function Admin() {
 
 	return (
 		<>
-			<SearchBar personaTipoId={tipoAdmin} />
+			<SearchBar personaTipoId={personTypeId} />
 
 			<PeopleList personaTipo={admins} />
 

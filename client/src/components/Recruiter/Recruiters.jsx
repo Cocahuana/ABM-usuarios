@@ -5,12 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
 import SearchBar from "../SearchBar";
-function Recruiters() {
+function Recruiters({ personTypeId }) {
 	const dispatch = useDispatch();
 	const { personasInfo } = useSelector((state) => state);
-	const tipoRecruiter = 3;
 	const recruiters = personasInfo.filter(
-		(e) => e.PersonaTipo_Id === tipoRecruiter
+		(e) => e.personaTipoId === personTypeId
 	);
 	useEffect(() => {
 		dispatch(getPersonas());
@@ -18,7 +17,7 @@ function Recruiters() {
 
 	return (
 		<>
-			<SearchBar personaTipoId={tipoRecruiter} />
+			<SearchBar personaTipoId={personTypeId} />
 			<PeopleList personaTipo={recruiters} />
 
 			<Button as={Link} to='/Recruiter/add' className='primary'>

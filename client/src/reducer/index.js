@@ -22,6 +22,7 @@ function rootReducer ( state = initialState, action ) {
             }
         case GET_PEOPLE_BY_NAME:
             // console.log( action.payload );
+
             return {
                 ...state,
                 personasInfo: action.payload,

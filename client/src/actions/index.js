@@ -158,8 +158,10 @@ export function getPeopleByName ( name, personaTipoId ) {
         try
         {
             // var json = await axios.get( `/getRecipes?title=` + title );
-            let filteredPeople = json.Personas.filter( ( e ) => e.PersonaTipo_Id == personaTipoId );
-            let result = filteredPeople.filter( ( e ) => e.Nombre.toLowerCase().includes( name.toLowerCase() ) )
+            let peopleFromApi = await axios.get( endpointPersonasFromApi );
+            let filteredPeople = peopleFromApi.data.filter( ( e ) => e.personaTipoId === personaTipoId );
+            let result = filteredPeople.filter( ( e ) => e.nombre.toLowerCase().includes( name.toLowerCase() ) );
+
             return dispatch( {
                 type: GET_PEOPLE_BY_NAME,
                 //json.data devuelve lo que nos da la ruta de arriba, ya filtrado por nombre
