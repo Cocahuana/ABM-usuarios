@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getPersonas } from "../../actions";
+import { createPerson, getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import Async, { useAsync } from "react-select/async";
@@ -16,6 +16,8 @@ export default function CreatePeople() {
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
 	const [persona, setPersona] = useState({
+		//personaId debe ser autoIncremental DESDE EL FRONT :/
+		personaId: undefined,
 		nombre: "",
 		apellido: "",
 		docTipo: "",
@@ -26,7 +28,7 @@ export default function CreatePeople() {
 		telLaboral: "",
 		linkedin: "",
 		cv: "",
-		personaTipoId: "",
+		personaTipoId: undefined,
 		domCalle: "",
 		domAltura: "",
 		domLocalidad: "",
@@ -71,7 +73,7 @@ export default function CreatePeople() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log(persona);
+		dispatch(createPerson(persona));
 		setPersona({
 			nombre: "",
 			apellido: "",

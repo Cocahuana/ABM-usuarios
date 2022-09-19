@@ -1,7 +1,7 @@
 import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME } from './actions'
 import json from '../utils/personas.json';
 import axios from 'axios';
-const endpointGetPersonasFromApi = "http://yamana.somee.com/api/personas";
+const endpointPersonasFromApi = "http://yamana.somee.com/api/personas";
 // const personasJson = '../../utils/personas.json';
 
 const adapterPeopleFromApi = ( people ) => {
@@ -68,7 +68,7 @@ export function getPersonas () {
     return async function ( dispatch ) {
         try
         {
-            let peopleFromApi = await axios.get( endpointGetPersonasFromApi );
+            let peopleFromApi = await axios.get( endpointPersonasFromApi );
             let formattedPeople = adapterPeopleFromApi( peopleFromApi.data );
             // let personasInfo = json.Personas;
             return dispatch( {
@@ -88,7 +88,7 @@ export function deleteUserById ( id ) {
         try
         {
             console.log( id );
-            let deletePerson = await axios.delete( endpointGetPersonasFromApi + `/${ id }` );
+            let deletePerson = await axios.delete( endpointPersonasFromApi + `/${ id }` );
             console.log( "Person eliminated successfully" )
             // let usersInfo = await axios.delete( `http://localhost:3001/users/${ id }` );
             // return dispatch( {
@@ -102,13 +102,27 @@ export function deleteUserById ( id ) {
     }
 }
 
+export function createPerson ( payload ) {
+    return function () {
+        try
+        {
+            let personFromApi = axios.post( endpointPersonasFromApi, payload );
+        }
+
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
+}
+
 export function updatePeopleById ( payload ) {
     return async function () {
         try
         {
             console.log( "Updated People: ", payload )
             // await axios.put( `http://localhost:3001/users/${ payload.usuarioId }`, payload );
-            let personFromApi = await axios.put( endpointGetPersonasFromApi + `/${ payload.personaId }`, payload );
+            let personFromApi = await axios.put( "http://yamana.somee.com/api/personas" + `/${ payload.personaId }`, payload );
 
         }
 
@@ -123,7 +137,7 @@ export function getPersonaDetail ( id ) {
     return async function ( dispatch ) {
         try
         {
-            let personFromApi = await axios.get( endpointGetPersonasFromApi + `/${ id }` );
+            let personFromApi = await axios.get( endpointPersonasFromApi + `/${ id }` );
             let formattedPerson = adapterPersonFromApi( personFromApi.data );
 
             //let foundPerson = json.Personas.find( ( e ) => e.Persona_Id == id );

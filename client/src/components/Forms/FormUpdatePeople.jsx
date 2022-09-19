@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getPersonaDetail, getPersonas } from "../../actions";
+import { getPersonaDetail, getPersonas, updatePeopleById } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { Link } from "react-router-dom";
@@ -18,6 +18,7 @@ function FormUpdatePeople() {
 	const [flagCargaPersona, setFlagCargaPersona] = useState(false);
 	// const [editFormData, setEditFormData]
 	const [persona, setPersona] = useState({
+		personaId: undefined,
 		nombre: "",
 		apellido: "",
 		docTipo: "",
@@ -47,6 +48,7 @@ function FormUpdatePeople() {
 	const defineSetPersona = () => {
 		setPersona({
 			...persona,
+			personaId: personaDetalle.personaId,
 			nombre: personaDetalle.nombre,
 			apellido: personaDetalle.apellido,
 			docTipo: personaDetalle.docTipo,
@@ -138,6 +140,7 @@ function FormUpdatePeople() {
 	function handleSubmit(e) {
 		e.preventDefault();
 		console.log(persona);
+		dispatch(updatePeopleById(persona));
 	}
 
 	function handleOnChange(e) {
