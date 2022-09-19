@@ -106,7 +106,7 @@ export function createPerson ( payload ) {
     return function () {
         try
         {
-            let personFromApi = axios.post( endpointPersonasFromApi, payload );
+            axios.post( endpointPersonasFromApi, payload );
         }
 
         catch ( error )

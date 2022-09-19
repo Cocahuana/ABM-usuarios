@@ -9,13 +9,14 @@ import Candidate from './components/Candidate/Candidates'
 import Client from './components/Client/Clients'
 import Recruiters from './components/Recruiter/Recruiters';
 import FormUpdatePeople from './components/Forms/FormUpdatePeople';
-
+import Auth from './components/Auth/Auth';
 function App () {
   return (
     <>
       <NavBar />
       <Routes>
-        <Route path="/" element={ <Home /> } />
+        {/* <Route path="/" element={ <Home /> } /> */ }
+        <Route path='/' element={ <Auth /> } />
         <Route path="/Admin" element={ <Admin /> } />
         <Route path="/Admin/add" element={ <CreatePeople /> } />
         <Route path="/Candidate" element={ <Candidate /> } />
