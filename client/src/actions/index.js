@@ -103,10 +103,12 @@ export function deleteUserById ( id ) {
 }
 
 export function createPerson ( payload ) {
-    return function () {
+    return async function ( dispatch ) {
         try
         {
-            axios.post( endpointPersonasFromApi, payload );
+            let response = await axios.post( endpointPersonasFromApi, payload );
+            console.log( "Person Created successfully" )
+
         }
 
         catch ( error )

@@ -1,81 +1,72 @@
-import React, { useEffect } from "react";
-import Persona from "./Forms/Persona";
-import { Table, Stack, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { orderByFirstName, getPersonas } from "../actions";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa";
+import React from "react";
+// import { useDispatch } from "react-redux";
+import DataTable from "react-data-table-component";
+import FormUpdateModal from "./Modals/FormUpdateModal";
 
 function PeopleList(props) {
 	let { personaTipo } = props;
-	const dispatch = useDispatch();
-
-	function handleSortFirstName(e) {
-		e.preventDefault();
-		dispatch(orderByFirstName(e.target.value));
-	}
+	// const dispatch = useDispatch();
+	const paginacionOpciones = {
+		rowsPerPageText: "Rows Per Page",
+		rangeSeparatorText: "of",
+		selectAllRowsItem: true,
+		selectAllRowsItemText: "All",
+	};
+	const columns = [
+		{
+			name: "First Name",
+			selector: (row) => row.nombre,
+			sortable: true,
+		},
+		{
+			name: "Last Name",
+			selector: (row) => row.apellido,
+			sortable: true,
+		},
+		{
+			name: "Email",
+			selector: (row) => row.mail,
+			sortable: true,
+		},
+		{
+			name: "Phone",
+			selector: (row) => row.telMovil,
+			sortable: true,
+		},
+		{
+			name: "Country",
+			selector: (row) => row.domPais,
+			sortable: true,
+		},
+		{
+			key: "action",
+			text: "Action",
+			className: "action",
+			sortable: false,
+			compact: true,
+			cell: (e) => {
+				return (
+					<>
+						<FormUpdateModal personId={e.personaId} />
+					</>
+				);
+			},
+		},
+	];
 	return (
 		<>
 			{personaTipo ? (
-				<Table striped bordered hover>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>
-								{
-									<Stack direction='horizontal' gap={2}>
-										First Name{" "}
-										<Button
-											type='button'
-											onClick={(e) =>
-												handleSortFirstName(e)
-											}
-											value='ascendente'>
-											<FaSortAlphaUp />
-										</Button>
-										<Button
-											type='button'
-											onClick={(e) =>
-												handleSortFirstName(e)
-											}
-											value='descendente'>
-											<FaSortAlphaDown />
-										</Button>
-									</Stack>
-								}
-							</th>
-							<th>Last Name</th>
-							<th>Mail</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						{personaTipo?.map((e) => (
-							<Persona
-								key={e.personaId}
-								persona_Id={e.personaId}
-								nombre={e.nombre}
-								apellido={e.apellido}
-								docTipo={e.docTipo}
-								docNro={e.docNro}
-								mail={e.mail}
-								telMovil={e.telMovil}
-								telPersonal={e.telPersonal}
-								telLaboral={e.telLaboral}
-								linkedin={e.linkedin}
-								cv={e.cv}
-								personaTipo_Id={e.personaTipoId}
-								domCalle={e.domCalle}
-								domAltura={e.domAltura}
-								domLocalidad={e.domLocalidad}
-								domProvincia={e.domProvincia}
-								domPais={e.domPais}
-								domCp={e.domCP}
-							/>
-						))}
-					</tbody>
-				</Table>
+				<DataTable
+					columns={columns}
+					data={personaTipo}
+					selectableRows
+					fixedHeader
+					fixedHeaderScrollHeight='430px'
+					pagination
+					paginationComponentOptions={paginacionOpciones}
+					noDataComponent=''
+					striped={true}
+				/>
 			) : (
 				<h3>Loading...</h3>
 			)}

@@ -3,16 +3,21 @@ import { createPerson, getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import Async, { useAsync } from "react-select/async";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BtnGoBack from "../BtnGoBack";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { validate } from "./PeopleValidation";
+import { useToast } from "@chakra-ui/react";
 
 export default function CreatePeople() {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const toast = useToast();
+	const toastTitle = "Success";
+	const toastDescription = "Person Created successfully";
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
 	const [persona, setPersona] = useState({
@@ -36,9 +41,6 @@ export default function CreatePeople() {
 		domPais: "",
 		domCp: "",
 	});
-
-	// const personas = useSelector((state) => state.personasInfo);
-	//DocTipo: D.N.I
 
 	useEffect(() => {
 		dispatch(getPersonas());
@@ -73,25 +75,34 @@ export default function CreatePeople() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		dispatch(createPerson(persona));
-		setPersona({
-			nombre: "",
-			apellido: "",
-			docTipo: "",
-			docNro: "",
-			mail: "",
-			telMovil: "",
-			telPersonal: "",
-			telLaboral: "",
-			linkedin: "",
-			cv: "",
-			personaTipoId: "",
-			domCalle: "",
-			domAltura: "",
-			domLocalidad: "",
-			domProvincia: "",
-			domPais: "",
-			domCp: "",
+		dispatch(createPerson(persona)).then((res) => {
+			setPersona({
+				nombre: "",
+				apellido: "",
+				docTipo: "",
+				docNro: "",
+				mail: "",
+				telMovil: "",
+				telPersonal: "",
+				telLaboral: "",
+				linkedin: "",
+				cv: "",
+				personaTipoId: "",
+				domCalle: "",
+				domAltura: "",
+				domLocalidad: "",
+				domProvincia: "",
+				domPais: "",
+				domCp: "",
+			});
+			navigate(-1);
+			toast({
+				title: toastTitle,
+				description: toastDescription,
+				status: "success",
+				duration: 9000,
+				isClosable: true,
+			});
 		});
 	}
 
