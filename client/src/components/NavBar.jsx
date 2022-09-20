@@ -23,19 +23,29 @@ function NavBar() {
 							</NavDropdown.Item>
 							<NavDropdown.Item as={Link} to='/Candidate'>
 								Candidate
+								{/* El candidato no puede tener accesso al sistema */}
 							</NavDropdown.Item>
 
 							<NavDropdown.Item as={Link} to='/Client'>
 								Client
+								{/* Solo puede ver la pantalla de ordenes */}
 							</NavDropdown.Item>
 
 							<NavDropdown.Item as={Link} to='/Recruiter'>
 								Recruiter
 							</NavDropdown.Item>
+							<NavDropdown.Item as={Link} to='/Empresa'>
+								Company
+							</NavDropdown.Item>
 
 							<NavDropdown.Divider />
 							<NavDropdown.Item>Separated link</NavDropdown.Item>
 						</NavDropdown>
+						{/* Agregar Ordenes y empresas */}
+						{/* Perfil de las personas Admin, Recruiter y Cliente */}
+						{/* En el perfil solo va a haber email (al que le llegan notificaciones),  */}
+						{/* Empresas, candidatos y ordenes tienen un menu diferente en el navbar */}
+						{/* Admin va a ver un menu de tablas auxiliares --> (Examenes, Skills, Atributos ) */}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

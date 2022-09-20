@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Auth.css";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
-function Auth(props) {
+function Auth({ setToken }) {
 	let [authMode, setAuthMode] = useState("signin");
 
 	const changeAuthMode = () => {
@@ -10,7 +10,7 @@ function Auth(props) {
 	};
 
 	if (authMode === "signin") {
-		return <Login changeAuthMode={changeAuthMode} />;
+		return <Login setToken={setToken} changeAuthMode={changeAuthMode} />;
 	}
 
 	return <Register changeAuthMode={changeAuthMode} />;
