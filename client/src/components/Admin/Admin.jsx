@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Spinner } from "@chakra-ui/react";
 // import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
 import SearchBar from "../SearchBar";
@@ -18,18 +19,36 @@ function Admin({ personTypeId }) {
 
 	return (
 		<>
-			<Stack>
-				<SearchBar personaTipoId={personTypeId} />
+			{admins.length === 0 ? (
+				<Stack
+					w='100%'
+					h='90vh'
+					direction={"column"}
+					justify='center'
+					align={"center"}>
+					<Spinner
+						thickness='4px'
+						speed='0.65s'
+						emptyColor='gray.200'
+						color='blue.500'
+						size='xl'
+						justifyContent={"center"}
+					/>
+				</Stack>
+			) : (
+				<Stack bg='red'>
+					<SearchBar personaTipoId={personTypeId} />
 
-				<PeopleList personaTipo={admins} />
+					<PeopleList personaTipo={admins} />
 
-				<Button as={Link} to='/Admin/add' className='primary'>
-					Add Admin
-				</Button>
-				<Button as={Link} to='/' className='btn btn-light'>
-					Go back
-				</Button>
-			</Stack>
+					<Button as={Link} to='/Admin/add' className='primary'>
+						Add Admin
+					</Button>
+					<Button as={Link} to='/' className='btn btn-light'>
+						Go back
+					</Button>
+				</Stack>
+			)}
 		</>
 	);
 }
