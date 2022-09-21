@@ -6,6 +6,8 @@ import {
 	Input,
 	InputGroup,
 	Button,
+	useColorMode,
+	useColorModeValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,6 +17,8 @@ import { useDispatch } from "react-redux";
 
 import { getPeopleByName } from "../actions";
 function SearchBar({ personaTipoId }) {
+	const { colorMode, toggleColorMode } = useColorMode();
+
 	const dispatch = useDispatch();
 	const [name, setName] = useState("");
 	function handleInputChange(e) {
@@ -60,7 +64,10 @@ function SearchBar({ personaTipoId }) {
 
 					<Button
 						color='white'
-						bg='blue.500'
+						bg={useColorModeValue(
+							"var(--primary-light)",
+							"var(--primary-dark)"
+						)}
 						rounded={"20px"}
 						variant='solid'
 						colorScheme='brand'

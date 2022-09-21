@@ -36,7 +36,11 @@ function Admin({ personTypeId }) {
 					/>
 				</Stack>
 			) : (
-				<Stack bg='red'>
+				<Stack
+					direction={"column"}
+					justify='center'
+					align={"center"}
+					padding='10px'>
 					<SearchBar personaTipoId={personTypeId} />
 
 					<PeopleList personaTipo={admins} />

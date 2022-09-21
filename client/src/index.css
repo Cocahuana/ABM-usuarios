@@ -5,12 +5,16 @@
 	*
 	*/
 	/* Crear variables para fuentes, tipos y tamaños de letra */
-	--violet: #5e00ff;
+	--violet: #b29ddb;
+	--violet-light: #e5ceff;
+	--violet-dark: #826fa9;
+	--blue: #1875d1;
+	--blue-light: #63a3ff;
+	--blue-dark: #004a9f;
 	--orange: #f39243;
-	--white: #eeeeee;
-	--dark: #21232c;
+	--white: #ffffff;
+	--black: #000000;
 	--green: #82f782;
-	--blue: #4a90e2;
 	--yellow: #edb95e;
 	--red: #e23636;
 	/*
@@ -18,14 +22,27 @@
 	* Actions
 	*
 	*/
-	--primary: var(--blue);
-	--accent1: var(--violet);
-	--accent2: var(--orange);
 	--success: var(--green);
 	--warning: var(--yellow);
 	--danger: var(--red);
-	--text-light: var(--white);
-	--text-dark: var(--dark);
+	/*
+		*
+		* Primary
+		*
+		*/
+	--primary: var(--violet);
+	--primary-light: var(--violet-light);
+	--primary-dark: var(--violet-dark);
+	--primary-text: var(--white);
+	/*
+		*
+		* Secondary
+		*
+		*/
+	--secondary: var(--blue);
+	--secondary-light: var(--blue-light);
+	--secondary-dark: var(--blue-dark);
+	--secondary-text: var(--dark);
 }
 
 body {
@@ -35,7 +52,6 @@ body {
 		"Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: var(--white);
 }
 
 code {
