@@ -1,7 +1,8 @@
-import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME } from './actions'
+import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL } from './actions'
 import json from '../utils/personas.json';
 import axios from 'axios';
 const endpointPersonasFromApi = "http://yamana.somee.com/api/personas";
+const endpointOrdenFromApi = "http://yamana.somee.com/api/Ordenes";
 // const personasJson = '../../utils/personas.json';
 
 const adapterPeopleFromApi = ( people ) => {
@@ -62,6 +63,68 @@ const adapterPersonFromApi = ( people ) => {
         mensajeOrigenes: people.mensajeOrigens,
     }
     return newPeople
+}
+
+const adapterOrdenesFromApiToJobPost = ( orden ) => {
+    let newJobPosting = orden.map( ( orden ) => {
+        return {
+            idOrden: orden.idOrden,
+            nombre: orden.nombre,
+            cantPuestos: orden.cantPuestos,
+            competencias: orden.competencias,
+            duracion: orden.duracion,
+            skill: orden.skill,
+            empresaId: orden.empresaId,
+            ciudad: orden.ciudad,
+            accontManagerId: orden.accontManagerId,
+            fInicioBusqueda: orden.fInicioBusqueda,
+            contratacionTipo: orden.contratacionTipo,
+            salario: orden.salario,
+            preferenciaJob: orden.preferenciaJob,
+            preferenciaCiudad: orden.preferenciaCiudad,
+            preferenciaOrganismo: orden.preferenciaOrganismo,
+            residencia: orden.residencia,
+            preguntas: orden.preguntas,
+            jobLevel: orden.jobLevel,
+            jobTypeId: orden.jobTypeId,
+            estudiosId: orden.estudiosId,
+            archivoPath: orden.archivoPath,
+            empresa: orden.empresa,
+            ordenEstado: orden.ordenEstado,
+            candidatos: orden.candidatos,
+        }
+    } );
+    return newJobPosting
+}
+
+const adapterOrdenFromApiToJobPost = ( orden ) => {
+
+    return {
+        idOrden: orden.idOrden,
+        nombre: orden.nombre,
+        cantPuestos: orden.cantPuestos,
+        competencias: orden.competencias,
+        duracion: orden.duracion,
+        skill: orden.skill,
+        empresaId: orden.empresaId,
+        ciudad: orden.ciudad,
+        accontManagerId: orden.accontManagerId,
+        fInicioBusqueda: orden.fInicioBusqueda,
+        contratacionTipo: orden.contratacionTipo,
+        salario: orden.salario,
+        preferenciaJob: orden.preferenciaJob,
+        preferenciaCiudad: orden.preferenciaCiudad,
+        preferenciaOrganismo: orden.preferenciaOrganismo,
+        residencia: orden.residencia,
+        preguntas: orden.preguntas,
+        jobLevel: orden.jobLevel,
+        jobTypeId: orden.jobTypeId,
+        estudiosId: orden.estudiosId,
+        archivoPath: orden.archivoPath,
+        empresa: orden.empresa,
+        ordenEstado: orden.ordenEstado,
+        candidatos: orden.candidatos,
+    }
 }
 
 export function getPersonas () {
@@ -181,4 +244,56 @@ export function orderByFirstName ( payload ) {
         type: ORDER_BY_FIRST_NAME,
         payload,
     };
+}
+
+export function getJobsPosting () {
+    return async function ( dispatch ) {
+        try
+        {
+            let jobsPostingFromApi = await axios.get( endpointOrdenFromApi );
+            let formattedJobsPosting = adapterOrdenesFromApiToJobPost( jobsPostingFromApi.data );
+            // let personasInfo = json.Personas;
+            return dispatch( {
+                type: GET_JOBS_POSTING,
+                payload: formattedJobsPosting
+            } )
+        }
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
+}
+
+export function getJobPostingDetail ( id ) {
+    return async function ( dispatch ) {
+        try
+        {
+            let jobPostingDetailFromApi = await axios.get( endpointOrdenFromApi + `/${ id }` );
+            let formattedJobPostingDetail = adapterOrdenFromApiToJobPost( jobPostingDetailFromApi.data );
+
+            return dispatch( {
+                type: GET_JOB_POSTING_DETAIL,
+                payload: formattedJobPostingDetail
+            } )
+        }
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
+}
+
+export function createJobPosting ( payload ) {
+    return async function ( dispatch ) {
+        try
+        {
+            let response = await axios.post( endpointOrdenFromApi, payload );
+            console.log( "Job Posting Created successfully" )
+        }
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
 }

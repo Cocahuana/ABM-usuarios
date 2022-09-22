@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { createPerson, getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import Async, { useAsync } from "react-select/async";
 import { Link, useNavigate } from "react-router-dom";
 import BtnGoBack from "../BtnGoBack";
 import { Button } from "react-bootstrap";

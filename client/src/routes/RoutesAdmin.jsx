@@ -8,6 +8,7 @@ import Candidate from "../components/Candidate/Candidates";
 import Client from "../components/Client/Clients";
 import Recruiters from "../components/Recruiter/Recruiters";
 import FormUpdatePeople from "../components/Forms/FormUpdatePeople";
+import CreateJobPost from "../components/Forms/CreateJobPost";
 
 import React from "react";
 
@@ -38,6 +39,7 @@ function RoutesAdmin() {
 			<Route path='/Recruiter/add' element={<CreatePeople />} />
 			<Route path='/People/update/:id' element={<FormUpdatePeople />} />
 			<Route path='/Empresa' element={<addCompany />} />
+			<Route path='/JobPosting/add' element={<CreateJobPost />} />
 		</Routes>
 	);
 }
