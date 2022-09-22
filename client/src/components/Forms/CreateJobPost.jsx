@@ -11,6 +11,7 @@ import { getJobsPosting, createJobPosting } from "../../actions";
 import BtnGoBack from "../BtnGoBack";
 import CustomInput from "./CustomInput";
 import { validateJobPosting } from "./validateJobPosting";
+import CustomSelect from "./CustomSelect";
 function CreateJobPost() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -111,34 +112,12 @@ function CreateJobPost() {
 		);
 	}
 
-	const candidatos = [{ value: 1, label: 2 }];
-	let arreglo = [];
-	for (const key in jobPost) {
-		arreglo.push(key);
-	}
-
-	const imprimirInputs = () => {
-		return arreglo.map((e) => {
-			return (
-				<Form.Group as={Col} className='mb-3'>
-					<Form.Label>{e}</Form.Label>
-					<Form.Control
-						type='text'
-						placeholder='John'
-						name={e}
-						required
-						value={jobPost.e}
-						isInvalid={errors.e}
-						isValid={!errors.e}
-						onChange={(e) => handleOnChange(e)}
-					/>
-					<Form.Control.Feedback type='invalid'>
-						{errors.e}
-					</Form.Control.Feedback>
-				</Form.Group>
-			);
-		});
-	};
+	const candidatos = [
+		{ value: 1, label: "Eze" },
+		{ value: 2, label: "Juan" },
+		{ value: 3, label: "Florencia" },
+		{ value: 4, label: "Marta" },
+	];
 
 	return (
 		<div>
@@ -280,20 +259,17 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 
-						<Form.Group as={Col} className='mb-3'>
-							<Form.Label>Candidatos</Form.Label>
-							<Select
-								name='candidates'
-								options={candidatos}
-								Searchable
-								onChange={(e) =>
-									setJobPost({
-										...jobPost,
-										candidatos: e.value,
-									})
-								}
-							/>
-						</Form.Group>
+						<CustomSelect
+							title={"Candidates"}
+							name='candidates'
+							options={candidatos}
+							handleOnChange={(e) =>
+								setJobPost({
+									...jobPost,
+									candidatos: e.value,
+								})
+							}
+						/>
 					</Row>
 				</fieldset>
 				<fieldset style={{ border: "3px solid" }} className='px-2'>
