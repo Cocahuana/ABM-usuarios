@@ -36,7 +36,7 @@ function DropdownEstudios({ handleOnChange }) {
 	const options = getOptions(studies);
 	return (
 		<Form.Group as={Col} className='mb-3'>
-			<Form.Label>Studies</Form.Label>
+			<Form.Label>Academic Studies</Form.Label>
 			<Select
 				name='estudiosId'
 				options={options}
