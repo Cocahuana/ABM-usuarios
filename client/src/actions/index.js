@@ -3,7 +3,7 @@ import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, OR
 import axios from 'axios';
 const endpointPersonasFromApi = "http://yamana.somee.com/api/personas";
 const endpointOrdenFromApi = "http://yamana.somee.com/api/Ordenes";
-const yamana = "http://yamana.somee.com/api";
+const yamana = "";
 const estudios = yamana + "/Estudios";
 const ordenes = yamana + "/Ordenes";
 const personas = yamana + "/personas";

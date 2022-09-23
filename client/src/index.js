@@ -7,6 +7,9 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux'
 import { store } from './store'
 import { ChakraProvider } from '@chakra-ui/react'
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_API || 'http://yamana.somee.com/api';
 
 const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
 root.render(
