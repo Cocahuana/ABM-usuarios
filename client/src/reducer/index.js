@@ -1,9 +1,10 @@
-import { GET_PERSONAS, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL } from "../actions/actions";
+import { GET_PERSONAS, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL, GET_STUDIES } from "../actions/actions";
 const initialState = {
     personasInfo: [],
     personaDetalle: [],
     jobsPosting: [],
     jobPostingDetail: [],
+    studies: [],
 }
 
 
@@ -68,6 +69,11 @@ function rootReducer ( state = initialState, action ) {
             return {
                 ...state,
                 jobPostingDetail: action.payload,
+            }
+        case GET_STUDIES:
+            return {
+                ...state,
+                studies: action.payload,
             }
         default:
             return state;

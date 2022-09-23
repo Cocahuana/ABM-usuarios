@@ -1,6 +1,8 @@
 export function validateJobPosting ( jobPost ) {
     let {
         nombre,
+        cantPuestos,
+        competencias
     } = jobPost;
     let errors = {};
 
@@ -22,6 +24,9 @@ export function validateJobPosting ( jobPost ) {
         errors.nombre = "First name can not include special characters";
     if ( nombre.length >= 45 )
         errors.nombre = "First name can not be longer to 45 characters";
+    /*cantPuestos*/
+    if ( competencias.length < 5 )
+        errors.competencias = "Competencies can not be under 5 words of length";
 
     return errors;
 }

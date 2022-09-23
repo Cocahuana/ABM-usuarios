@@ -1,8 +1,14 @@
-import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL } from './actions'
-import json from '../utils/personas.json';
+import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL, GET_STUDIES } from './actions'
+// import json from '../utils/personas.json';
 import axios from 'axios';
 const endpointPersonasFromApi = "http://yamana.somee.com/api/personas";
 const endpointOrdenFromApi = "http://yamana.somee.com/api/Ordenes";
+const yamana = "http://yamana.somee.com/api";
+const estudios = yamana + "/Estudios";
+const ordenes = yamana + "/Ordenes";
+const personas = yamana + "/personas";
+
+
 // const personasJson = '../../utils/personas.json';
 
 const adapterPeopleFromApi = ( people ) => {
@@ -125,6 +131,15 @@ const adapterOrdenFromApiToJobPost = ( orden ) => {
         ordenEstado: orden.ordenEstado,
         candidatos: orden.candidatos,
     }
+}
+
+const adapterEstudiosFromApiToStudies = ( estudios ) => {
+    return estudios.map( ( e ) => {
+        return {
+            idEstudio: e.idEstudio,
+            study: e.descripcion,
+        }
+    } )
 }
 
 export function getPersonas () {
@@ -290,6 +305,24 @@ export function createJobPosting ( payload ) {
         {
             let response = await axios.post( endpointOrdenFromApi, payload );
             console.log( "Job Posting Created successfully" )
+        }
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
+}
+
+export function getStudies () {
+    return async function ( dispatch ) {
+        try
+        {
+            let studiesFromApi = await axios.get( estudios );
+            let formattedStudies = adapterEstudiosFromApiToStudies( studiesFromApi.data );
+            return dispatch( {
+                type: GET_STUDIES,
+                payload: formattedStudies
+            } )
         }
         catch ( error )
         {

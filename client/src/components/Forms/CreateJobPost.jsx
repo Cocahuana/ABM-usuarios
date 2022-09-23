@@ -10,8 +10,9 @@ import Row from "react-bootstrap/Row";
 import { getJobsPosting, createJobPosting } from "../../actions";
 import BtnGoBack from "../BtnGoBack";
 import CustomInput from "./CustomInput";
+import DropdownEstudios from "./CustomSelects.jsx/DropdownEstudios";
 import { validateJobPosting } from "./validateJobPosting";
-import CustomSelect from "./CustomSelect";
+import CustomSelect from "./CustomSelects.jsx/CustomSelect";
 function CreateJobPost() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -276,6 +277,9 @@ function CreateJobPost() {
 					<legend className='float-none w-auto p-2'>
 						Location Information
 					</legend>
+					<Row>
+						<DropdownEstudios />
+					</Row>
 				</fieldset>
 				<div className='m-2 d-flex justify-content-end'>
 					<Button

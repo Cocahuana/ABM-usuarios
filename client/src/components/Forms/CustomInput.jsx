@@ -1,6 +1,5 @@
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
-
 function CustomInput({
 	title,
 	name,
