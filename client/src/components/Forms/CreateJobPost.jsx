@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { getJobsPosting, createJobPosting } from "../../actions";
-import BtnGoBack from "../BtnGoBack";
+import BtnGoBack from "../Buttons/BtnGoBack";
 import CustomInput from "./CustomInput";
 import DropdownEstudios from "./CustomSelects.jsx/DropdownEstudios";
 import { validateJobPosting } from "./validateJobPosting";

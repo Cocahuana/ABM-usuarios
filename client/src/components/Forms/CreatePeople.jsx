@@ -3,7 +3,7 @@ import { createPerson, getPersonas } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { Link, useNavigate } from "react-router-dom";
-import BtnGoBack from "../BtnGoBack";
+import BtnGoBack from "../Buttons/BtnGoBack";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";

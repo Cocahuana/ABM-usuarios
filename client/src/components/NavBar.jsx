@@ -67,11 +67,10 @@ function NavBar() {
 									</MenuItem>
 								</MenuList>
 							</Menu>
-							<Flex
-								as={RouterLink}
-								to='/Company'
-								alignItems={"center"}>
-								Company Name
+							<Flex alignItems={"center"}>
+								<Button as={RouterLink} to='/Company/add'>
+									Company Add
+								</Button>
 							</Flex>
 						</Stack>
 					</Flex>

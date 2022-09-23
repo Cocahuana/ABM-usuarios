@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { deleteUserById } from "../actions";
+import { deleteUserById } from "../../actions";
 // import { Button } from "react-bootstrap";
 
 import styled from "styled-components";

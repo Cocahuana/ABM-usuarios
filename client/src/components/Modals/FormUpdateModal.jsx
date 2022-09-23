@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import BtnPeopleDelete from "../BtnPeopleDelete";
-import BtnPeopleUpdate from "../BtnPeopleUpdate";
+import BtnPeopleDelete from "../Buttons/BtnPeopleDelete";
+import BtnPeopleUpdate from "../Buttons/BtnPeopleUpdate";
 function FormUpdateModal({ personId }) {
 	const [show, setShow] = useState(false);
 

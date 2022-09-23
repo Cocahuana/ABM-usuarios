@@ -10,7 +10,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { validate } from "./PeopleValidation";
-import BtnGoBack from "../BtnGoBack";
+import BtnGoBack from "../Buttons/BtnGoBack";
 
 function FormUpdatePeople() {
 	const dispatch = useDispatch();

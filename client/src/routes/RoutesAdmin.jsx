@@ -38,7 +38,7 @@ function RoutesAdmin() {
 			/>
 			<Route path='/Recruiter/add' element={<CreatePeople />} />
 			<Route path='/People/update/:id' element={<FormUpdatePeople />} />
-			<Route path='/Empresa' element={<addCompany />} />
+			<Route path='/Company/add' element={<AddCompany />} />
 			<Route path='/JobPosting/add' element={<CreateJobPost />} />
 		</Routes>
 	);
