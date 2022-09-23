@@ -9,6 +9,7 @@ import Client from "../components/Client/Clients";
 import Recruiters from "../components/Recruiter/Recruiters";
 import FormUpdatePeople from "../components/Forms/FormUpdatePeople";
 import CreateJobPost from "../components/Forms/CreateJobPost";
+import Companies from "../components/Company/Companies";
 
 import React from "react";
 
@@ -31,13 +32,14 @@ function RoutesAdmin() {
 				path='/Client'
 				element={<Client personTypeId={tipoCliente} />}
 			/>
-			<Route path='/Client/add' element={<AddCompany />} />
+			<Route path='/Client/add' element={<CreatePeople />} />
 			<Route
 				path='/Recruiter'
 				element={<Recruiters personTypeId={tipoRecruiter} />}
 			/>
 			<Route path='/Recruiter/add' element={<CreatePeople />} />
 			<Route path='/People/update/:id' element={<FormUpdatePeople />} />
+			<Route path='/Company' element={<Companies />} />
 			<Route path='/Company/add' element={<AddCompany />} />
 			<Route path='/JobPosting/add' element={<CreateJobPost />} />
 		</Routes>

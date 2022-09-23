@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { Link } from "react-router-dom";
-
+import BtnGoBack from "../Buttons/BtnGoBack";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import { createCompany } from "../../actions";
 
 function validate(company) {
 	let {
@@ -153,7 +154,7 @@ export default function AddCompany() {
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		console.log(company);
+		dispatch(createCompany(company));
 		setCompany({
 			nombre: "",
 			telPrincipal: "",
@@ -412,9 +413,7 @@ export default function AddCompany() {
 						className='btn btn-primary'>
 						<i className='fa fa-save'></i> Save
 					</Button>
-					<Button as={Link} to='/Recruiter' className='btn btn-light'>
-						Go back
-					</Button>
+					<BtnGoBack />
 				</div>
 			</Form>
 		</div>

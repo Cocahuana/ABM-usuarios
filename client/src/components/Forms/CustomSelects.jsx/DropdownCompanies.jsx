@@ -2,17 +2,17 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Select from "react-select";
 import {useSelector} from "react-redux";
-import {getStudies} from "../../../actions";
+import {getCompanies} from "../../../actions";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
-function DropdownEstudios({handleOnChange}) {
+function DropdownCompanies({handleOnChange}) {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		return () => {
-			dispatch(getStudies());
+			dispatch(getCompanies());
 		};
 	}, [dispatch]);
-	const {studies} = useSelector((state) => state);
+	const {companies} = useSelector((state) => state);
 
 	const getOptions = () => {
 		// Formateamos la opcion de acuerdo a la dependencia Select
@@ -26,27 +26,25 @@ function DropdownEstudios({handleOnChange}) {
 		//
 		const storeOptions = (array) => {
 			const storedOptions = array.map((e) => {
-				return newOption(e.idEstudio, e.study);
+				return newOption(e.empresaId, e.nombre);
 			});
 			return storedOptions;
 		};
-		return storeOptions(studies);
+		return storeOptions(companies);
 	};
 
-	const options = getOptions(studies);
-	console.log(options);
-	const def = [{value: 0, label: "No selected"}];
+	const options = getOptions(companies);
 	return (
 		<Form.Group as={Col} className='mb-3'>
-			<Form.Label>Academic Studies</Form.Label>
+			<Form.Label>Companies</Form.Label>
 			<Select
-				name='estudiosId'
+				name={"empresaId"}
 				options={options}
-				defaultValue={def}
+				Searchable
 				onChange={handleOnChange}
 			/>
 		</Form.Group>
 	);
 }
 
-export default DropdownEstudios;
+export default DropdownCompanies;

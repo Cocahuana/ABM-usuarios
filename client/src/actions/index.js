@@ -1,4 +1,4 @@
-import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL, GET_STUDIES } from './actions'
+import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL, GET_STUDIES, GET_COMPANIES } from './actions'
 // import json from '../utils/personas.json';
 import axios from 'axios';
 const endpointPersonasFromApi = "http://yamana.somee.com/api/personas";
@@ -7,6 +7,7 @@ const yamana = "http://yamana.somee.com/api";
 const estudios = yamana + "/Estudios";
 const ordenes = yamana + "/Ordenes";
 const personas = yamana + "/personas";
+const empresas = yamana + "/Empresas";
 
 
 // const personasJson = '../../utils/personas.json';
@@ -142,6 +143,33 @@ const adapterEstudiosFromApiToStudies = ( estudios ) => {
     } )
 }
 
+const adapterCompaniesFromApi = ( companies ) => {
+    // El adapter o interfaz separa la forma en la que se trabajan los datos desde el back hacia el front. 
+    // De esta forma, si la forma en que los datos llegan desde el back cambian, 
+    // no nos rompe toda la app ya que trabajamos los objetos con nombres de propiedades fijos
+    let newCompanies = companies.map( ( companies ) => {
+        return {
+            personaId: companies.empresaId,
+            nombre: companies.nombre,
+            telPrincipal: companies.telPrincipal,
+            telSecundario: companies.telSecundario,
+            telFax: companies.telFax,
+            domCalle: companies.domCalle,
+            domAltura: companies.domAltura,
+            domLocalidad: companies.domLocalidad,
+            domProvincia: companies.domProvincia,
+            domPais: companies.domPais,
+            domCp: companies.domCp,
+            webSite: companies.webSite,
+            keyTechnologies: companies.keyTecnologies,
+            mensajeDestinos: companies.contactoId,
+            mensajeOrigenes: companies.contacto,
+            ordenes: companies.ordenes,
+        }
+    } )
+    return newCompanies
+}
+
 export function getPersonas () {
     return async function ( dispatch ) {
         try
@@ -203,7 +231,6 @@ export function updatePeopleById ( payload ) {
             console.log( "Updated People: ", payload )
             // await axios.put( `http://localhost:3001/users/${ payload.usuarioId }`, payload );
             let personFromApi = await axios.put( "http://yamana.somee.com/api/personas" + `/${ payload.personaId }`, payload );
-
         }
 
         catch ( error )
@@ -323,6 +350,38 @@ export function getStudies () {
                 type: GET_STUDIES,
                 payload: formattedStudies
             } )
+        }
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
+}
+
+export function getCompanies () {
+    return async function ( dispatch ) {
+        try
+        {
+            let companiesFromApi = await axios.get( empresas );
+            let formattedCompanies = adapterCompaniesFromApi( companiesFromApi.data );
+            return dispatch( {
+                type: GET_COMPANIES,
+                payload: formattedCompanies
+            } )
+        }
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
+}
+
+export function createCompany ( payload ) {
+    return async function ( dispatch ) {
+        try
+        {
+            let response = await axios.post( empresas, payload );
+            console.log( "Company Created successfully" )
         }
         catch ( error )
         {

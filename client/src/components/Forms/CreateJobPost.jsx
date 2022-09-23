@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useToast } from "@chakra-ui/react";
-import Select from "react-select";
-import { Button } from "react-bootstrap";
+import React, {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {useToast} from "@chakra-ui/react";
+import {Button} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { getJobsPosting, createJobPosting } from "../../actions";
+import {getJobsPosting, createJobPosting} from "../../actions";
 import BtnGoBack from "../Buttons/BtnGoBack";
 import CustomInput from "./CustomInput";
 import DropdownEstudios from "./CustomSelects.jsx/DropdownEstudios";
-import { validateJobPosting } from "./validateJobPosting";
+import {validateJobPosting} from "./validateJobPosting";
 import CustomSelect from "./CustomSelects.jsx/CustomSelect";
+import DropdownCompanies from "./CustomSelects.jsx/DropdownCompanies";
 function CreateJobPost() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -40,6 +39,7 @@ function CreateJobPost() {
 		residencia: "",
 		preguntas: "",
 		jobLevel: "",
+		jobDescription: "",
 		jobTypeId: "",
 		estudiosId: "",
 		archivoPath: "",
@@ -96,7 +96,7 @@ function CreateJobPost() {
 	}
 
 	function handleOnChange(e) {
-		let { name, value } = e.target;
+		let {name, value} = e.target;
 
 		// Los selects no devuelven un name, por lo que el value del e.target
 		// se lo tenemos que asignar al value del key de nuestro useState
@@ -114,23 +114,21 @@ function CreateJobPost() {
 	}
 
 	const candidatos = [
-		{ value: 1, label: "Eze" },
-		{ value: 2, label: "Juan" },
-		{ value: 3, label: "Florencia" },
-		{ value: 4, label: "Marta" },
+		{value: 1, label: "Eze"},
+		{value: 2, label: "Juan"},
+		{value: 3, label: "Florencia"},
+		{value: 4, label: "Marta"},
 	];
 
 	return (
 		<div>
 			<Form className='p-4' onSubmit={handleSubmit}>
 				<h3>Job Posting</h3>
-				<fieldset style={{ border: "3px solid" }} className='px-2'>
-					<legend className='float-none w-auto p-2'>
-						About candidate
-					</legend>
+				<fieldset style={{border: "3px solid"}} className='px-2'>
+					<legend className='float-none w-auto p-2'>Profile</legend>
 					<Row>
 						<CustomInput
-							title={"Post Title"}
+							title={"Position title"}
 							name={"nombre"}
 							type={"text"}
 							placeholder={"FullStack Developer"}
@@ -139,7 +137,7 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"Positions to cover"}
+							title={"Openings"}
 							name={"cantPuestos"}
 							type={"number"}
 							placeholder={"4"}
@@ -186,19 +184,19 @@ function CreateJobPost() {
 					</Row>
 					<Row>
 						<CustomInput
-							title={"Contract type"}
+							title={"Job Type"}
 							name={"contratacionTipo"}
 							type={"text"}
-							placeholder={"Contractor"}
+							placeholder={"Full time, part-time"}
 							value={jobPost.contratacionTipo}
 							errors={errors.contratacionTipo}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"Position Budget"}
+							title={"Salary Range"}
 							name={"salario"}
 							type={"number"}
-							placeholder={"1500"}
+							placeholder={"1900 - 2300"}
 							value={jobPost.salario}
 							errors={errors.salario}
 							handleOnChange={(e) => handleOnChange(e)}
@@ -210,6 +208,15 @@ function CreateJobPost() {
 							placeholder={"Open to relocate"}
 							value={jobPost.preferenciaJob}
 							errors={errors.preferenciaJob}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<CustomInput
+							title={"Job Description"}
+							name={"jobDescription"}
+							type={"text"}
+							placeholder={"What will you do? ..."}
+							value={jobPost.jobDescription}
+							errors={errors.jobDescription}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
@@ -273,13 +280,27 @@ function CreateJobPost() {
 						/>
 					</Row>
 				</fieldset>
-				<fieldset style={{ border: "3px solid" }} className='px-2'>
+				<fieldset style={{border: "3px solid"}} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Location Information
 					</legend>
 					<Row>
 						<DropdownEstudios />
+						<DropdownCompanies
+							handleOnChange={(e) =>
+								setJobPost({
+									...jobPost,
+									empresaId: e.value,
+								})
+							}
+						/>
 					</Row>
+				</fieldset>
+				<fieldset style={{border: "3px solid"}} className='px-2'>
+					<legend className='float-none w-auto p-2'>
+						Company Information
+					</legend>
+					<Row>{/* Localidad, Contacto,  */}</Row>
 				</fieldset>
 				<div className='m-2 d-flex justify-content-end'>
 					<Button
