@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ABM-usuarios/static/css/main.a36c4d39.css",
+    "main.js": "/ABM-usuarios/static/js/main.7910e5a2.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/ABM-usuarios/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/ABM-usuarios/index.html",
+    "main.a36c4d39.css.map": "/ABM-usuarios/static/css/main.a36c4d39.css.map",
+    "main.7910e5a2.js.map": "/ABM-usuarios/static/js/main.7910e5a2.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/ABM-usuarios/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a36c4d39.css",
+    "static/js/main.7910e5a2.js"
+  ]
+}
