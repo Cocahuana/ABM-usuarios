@@ -175,6 +175,7 @@ export function getPersonas () {
         try
         {
             let peopleFromApi = await axios.get( "/personas" );
+            console.log( "people from api:", peopleFromApi )
             let formattedPeople = adapterPeopleFromApi( peopleFromApi.data );
             // let personasInfo = json.Personas;
             return dispatch( {

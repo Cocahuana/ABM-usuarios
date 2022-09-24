@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getPersonas } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
-import { Spinner } from "@chakra-ui/react";
+import React, {useEffect} from "react";
+import {Link} from "react-router-dom";
+import {getPersonas} from "../../actions";
+import {useDispatch, useSelector} from "react-redux";
+import {Spinner} from "@chakra-ui/react";
 // import { Button } from "react-bootstrap";
 import PeopleList from "../PeopleList";
 import SearchBar from "../SearchBar";
-import { Box, Stack, Input, InputGroup, Button } from "@chakra-ui/react";
-function Admin({ personTypeId }) {
+import {Box, Stack, Input, InputGroup, Button} from "@chakra-ui/react";
+function Admin({personTypeId}) {
 	const dispatch = useDispatch();
-	let { personasInfo } = useSelector((state) => state);
+	let {personasInfo} = useSelector((state) => state);
 
 	let admins = personasInfo.filter((e) => e.personaTipoId === personTypeId);
+	const [loading, setLoading] = useState(false);
+
+	if (admins) setLoading(true);
 
 	useEffect(() => {
 		dispatch(getPersonas());
@@ -19,7 +22,7 @@ function Admin({ personTypeId }) {
 
 	return (
 		<>
-			{admins.length === 0 ? (
+			{loading === false ? (
 				<Stack
 					w='100%'
 					h='90vh'
