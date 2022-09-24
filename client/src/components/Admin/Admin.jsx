@@ -14,10 +14,9 @@ function Admin({personTypeId}) {
 	let admins = personasInfo.filter((e) => e.personaTipoId === personTypeId);
 	const [loading, setLoading] = useState(false);
 
-	if (admins) setLoading(true);
-
 	useEffect(() => {
 		dispatch(getPersonas());
+		if (admins) setLoading(true);
 	}, [dispatch]);
 
 	return (
