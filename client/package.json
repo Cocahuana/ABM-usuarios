@@ -1,7 +1,7 @@
 {
 	"name": "client",
 	"version": "0.1.0",
-	"homepage": "https://Cocahuana.github.io/ABM-usuarios",
+	"homepage": "https://Cocahuana.github.io/ABM-usuarios/",
 	"private": true,
 	"dependencies": {
 		"@chakra-ui/icons": "^2.0.10",
