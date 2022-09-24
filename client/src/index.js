@@ -10,7 +10,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import axios from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_API || 'http://yamana.somee.com/api';
-
+console.log( "react app api: ", process.env.REACT_APP_API )
 const root = ReactDOM.createRoot( document.getElementById( 'root' ) );
 root.render(
   <React.StrictMode>
