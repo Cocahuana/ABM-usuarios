@@ -344,7 +344,7 @@ export function getStudies () {
     return async function ( dispatch ) {
         try
         {
-            let studiesFromApi = await axios.get( estudios );
+            let studiesFromApi = await axios.get( "/Estudios" );
             let formattedStudies = adapterEstudiosFromApiToStudies( studiesFromApi.data );
             return dispatch( {
                 type: GET_STUDIES,
