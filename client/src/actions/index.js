@@ -149,7 +149,7 @@ const adapterCompaniesFromApi = ( companies ) => {
     // no nos rompe toda la app ya que trabajamos los objetos con nombres de propiedades fijos
     let newCompanies = companies.map( ( companies ) => {
         return {
-            personaId: companies.empresaId,
+            empresaId: companies.empresaId,
             nombre: companies.nombre,
             telPrincipal: companies.telPrincipal,
             telSecundario: companies.telSecundario,

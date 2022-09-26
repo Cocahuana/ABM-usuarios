@@ -48,11 +48,11 @@ function CreateJobPost() {
 		candidatos: "",
 	});
 
-	useEffect(() => {
-		return () => {
-			dispatch(getJobsPosting());
-		};
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	return () => {
+	// 		dispatch(getJobsPosting());
+	// 	};
+	// }, [dispatch]);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -121,14 +121,16 @@ function CreateJobPost() {
 	];
 
 	return (
-		<div>
+		<>
 			<Form className='p-4' onSubmit={handleSubmit}>
-				<h3>Job Posting</h3>
+				{/* Red */}
 				<fieldset style={{border: "3px solid"}} className='px-2'>
-					<legend className='float-none w-auto p-2'>Profile</legend>
+					<legend className='float-none w-auto p-2'>
+						About Job Posting
+					</legend>
 					<Row>
 						<CustomInput
-							title={"Position title"}
+							title={"Position Name"}
 							name={"nombre"}
 							type={"text"}
 							placeholder={"FullStack Developer"}
@@ -136,6 +138,32 @@ function CreateJobPost() {
 							errors={errors.nombre}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
+						<CustomInput
+							title={"Recruiter (descolgable)"}
+							name={"test"}
+							type={"text"}
+							placeholder={"I am a select"}
+							value={"Not assigned yet"}
+							errors={"errors.nombre"}
+						/>
+						<CustomInput
+							title={"Account Manager"}
+							name={"test"}
+							type={"text"}
+							placeholder={"I am a select"}
+							value={"Not assigned yet"}
+							errors={"errors.nombre"}
+						/>
+						<CustomInput
+							title={"Start Date: (data picker)"}
+							name={"test"}
+							type={"text"}
+							placeholder={"I am a select"}
+							value={"Not assigned yet"}
+							errors={"errors.nombre"}
+						/>
+					</Row>
+					<Row>
 						<CustomInput
 							title={"Openings"}
 							name={"cantPuestos"}
@@ -146,68 +174,44 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"Competencies"}
-							name={"competencias"}
+							title={"Tests (examenes)"}
+							name={"test"}
 							type={"text"}
-							placeholder={"Active listener"}
-							value={jobPost.competencias}
-							errors={errors.competencias}
-							handleOnChange={(e) => handleOnChange(e)}
+							placeholder={"I am a select"}
+							value={"Not assigned yet"}
+							errors={"errors.nombre"}
 						/>
 						<CustomInput
-							title={"Duration"}
-							name={"duracion"}
+							title={"Attachments"}
+							name={"test"}
 							type={"text"}
-							placeholder={"1 screening. 3 technical interviews"}
-							value={jobPost.duracion}
-							errors={errors.duracion}
-							handleOnChange={(e) => handleOnChange(e)}
+							placeholder={"I am a select"}
+							value={"Not assigned yet"}
+							errors={"errors.nombre"}
 						/>
 						<CustomInput
-							title={"Skill"}
+							title={"Job Posting state"}
+							name={"test"}
+							type={"text"}
+							placeholder={"I am a select"}
+							value={"Not assigned yet"}
+							errors={"errors.nombre"}
+						/>
+					</Row>
+				</fieldset>
+				{/* Green */}
+				<fieldset style={{border: "3px solid"}} className='px-2'>
+					<legend className='float-none w-auto p-2'>
+						Ideal candidate profile
+					</legend>
+					<Row>
+						<CustomInput
+							title={"Main Skill"}
 							name={"skill"}
 							type={"text"}
 							placeholder={"Javascript"}
 							value={jobPost.skill}
 							errors={errors.skill}
-							handleOnChange={(e) => handleOnChange(e)}
-						/>
-						<CustomInput
-							title={"City"}
-							name={"ciudad"}
-							type={"text"}
-							placeholder={"Miami"}
-							value={jobPost.ciudad}
-							errors={errors.ciudad}
-							handleOnChange={(e) => handleOnChange(e)}
-						/>
-					</Row>
-					<Row>
-						<CustomInput
-							title={"Job Type"}
-							name={"contratacionTipo"}
-							type={"text"}
-							placeholder={"Full time, part-time"}
-							value={jobPost.contratacionTipo}
-							errors={errors.contratacionTipo}
-							handleOnChange={(e) => handleOnChange(e)}
-						/>
-						<CustomInput
-							title={"Salary Range"}
-							name={"salario"}
-							type={"number"}
-							placeholder={"1900 - 2300"}
-							value={jobPost.salario}
-							errors={errors.salario}
-							handleOnChange={(e) => handleOnChange(e)}
-						/>
-						<CustomInput
-							title={"Job preference"}
-							name={"preferenciaJob"}
-							type={"text"}
-							placeholder={"Open to relocate"}
-							value={jobPost.preferenciaJob}
-							errors={errors.preferenciaJob}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
@@ -220,7 +224,80 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"City preference"}
+							title={"Job Type"}
+							name={"contratacionTipo"}
+							type={"text"}
+							placeholder={"Full time, part-time"}
+							value={jobPost.contratacionTipo}
+							errors={errors.contratacionTipo}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<CustomInput
+							title={"Competencies"}
+							name={"competencias"}
+							type={"text"}
+							placeholder={"Active listener"}
+							value={jobPost.competencias}
+							errors={errors.competencias}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<DropdownEstudios />
+					</Row>
+				</fieldset>
+				{/* Orange */}
+				<fieldset style={{border: "3px solid"}} className='px-2'>
+					<legend className='float-none w-auto p-2'>Orange</legend>
+					<Row>
+						<CustomInput
+							title={"State"}
+							name={"duracion"}
+							type={"text"}
+							placeholder={"Colorado"}
+							value={jobPost.duracion}
+							errors={errors.duracion}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<CustomInput
+							title={"Duration"}
+							name={"duracion"}
+							type={"text"}
+							placeholder={"1 screening. 3 technical interviews"}
+							value={jobPost.duracion}
+							errors={errors.duracion}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<CustomInput
+							title={"Type"}
+							name={"contratacionTipo"}
+							type={"text"}
+							placeholder={"Full-time, part-time"}
+							value={jobPost.contratacionTipo}
+							errors={errors.contratacionTipo}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<CustomInput
+							title={"Salary"}
+							name={"contratacionTipo"}
+							type={"text"}
+							placeholder={"1500 - 1800"}
+							value={jobPost.contratacionTipo}
+							errors={errors.contratacionTipo}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+					</Row>
+					<Row>
+						<CustomInput
+							title={"Preferred Jobs"}
+							name={"preferenciaJob"}
+							type={"text"}
+							placeholder={"Open to relocate"}
+							value={jobPost.preferenciaJob}
+							errors={errors.preferenciaJob}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+
+						<CustomInput
+							title={"Preferred Locations"}
 							name={"preferenciaCiudad"}
 							type={"text"}
 							placeholder={"Boston"}
@@ -229,7 +306,7 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"Company preference"}
+							title={"Preferred Organizations"}
 							name={"preferenciaOrganismo"}
 							type={"text"}
 							placeholder={"Microsoft"}
@@ -238,7 +315,7 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"Residence"}
+							title={"Place of Residence"}
 							name={"residencia"}
 							type={"text"}
 							placeholder={"Uk, London"}
@@ -246,6 +323,52 @@ function CreateJobPost() {
 							errors={errors.residencia}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
+					</Row>
+				</fieldset>
+				{/* Yellow */}
+				<fieldset style={{border: "3px solid"}} className='px-2'>
+					<legend className='float-none w-auto p-2'>
+						Company Information
+					</legend>
+					<Row>
+						<DropdownCompanies
+							handleOnChange={(e) =>
+								setJobPost({
+									...jobPost,
+									empresaId: e.value,
+								})
+							}
+						/>
+						<CustomInput
+							title={"Department"}
+							name={"ciudad"}
+							type={"text"}
+							placeholder={"RRHH"}
+							value={jobPost.ciudad}
+							errors={errors.ciudad}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<CustomInput
+							title={"Contact"}
+							name={"ciudad"}
+							type={"text"}
+							placeholder={
+								"Margaret, Head-Hunter RRHH department"
+							}
+							value={jobPost.ciudad}
+							errors={errors.ciudad}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+						<CustomInput
+							title={"City"}
+							name={"ciudad"}
+							type={"text"}
+							placeholder={"Miami"}
+							value={jobPost.ciudad}
+							errors={errors.ciudad}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
+
 						<CustomInput
 							title={"Questions to the candidate"}
 							name={"preguntas"}
@@ -255,18 +378,24 @@ function CreateJobPost() {
 							errors={errors.preguntas}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
-					</Row>
-					<Row>
 						<CustomInput
-							title={"Seniority"}
+							title={"Job Level"}
 							name={"jobLevel"}
 							type={"text"}
-							placeholder={"Junior Advanced"}
+							placeholder={"Junior Advanced, Senior"}
 							value={jobPost.jobLevel}
 							errors={errors.jobLevel}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
-
+						<CustomInput
+							title={"Type from company job order"}
+							name={"contratacionTipo"}
+							type={"text"}
+							placeholder={"Full-time, part-time"}
+							value={jobPost.contratacionTipo}
+							errors={errors.contratacionTipo}
+							handleOnChange={(e) => handleOnChange(e)}
+						/>
 						<CustomSelect
 							title={"Candidates"}
 							name='candidates'
@@ -278,30 +407,18 @@ function CreateJobPost() {
 								})
 							}
 						/>
-					</Row>
-				</fieldset>
-				<fieldset style={{border: "3px solid"}} className='px-2'>
-					<legend className='float-none w-auto p-2'>
-						Location Information
-					</legend>
-					<Row>
-						<DropdownEstudios />
-						<DropdownCompanies
-							handleOnChange={(e) =>
-								setJobPost({
-									...jobPost,
-									empresaId: e.value,
-								})
-							}
+						<CustomInput
+							title={"Employee status"}
+							name={"ciudad"}
+							type={"text"}
+							placeholder={"Active"}
+							value={jobPost.ciudad}
+							errors={errors.ciudad}
+							handleOnChange={(e) => handleOnChange(e)}
 						/>
 					</Row>
 				</fieldset>
-				<fieldset style={{border: "3px solid"}} className='px-2'>
-					<legend className='float-none w-auto p-2'>
-						Company Information
-					</legend>
-					<Row>{/* Localidad, Contacto,  */}</Row>
-				</fieldset>
+
 				<div className='m-2 d-flex justify-content-end'>
 					<Button
 						type='submit'
@@ -318,7 +435,7 @@ function CreateJobPost() {
 					<BtnGoBack />
 				</div>
 			</Form>
-		</div>
+		</>
 	);
 }
 

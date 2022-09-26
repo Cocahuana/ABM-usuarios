@@ -14,7 +14,7 @@ function DropdownCompanies({handleOnChange}) {
 	}, [dispatch]);
 	const {companies} = useSelector((state) => state);
 
-	const getOptions = () => {
+	const getOptions = (array) => {
 		// Formateamos la opcion de acuerdo a la dependencia Select
 		const newOption = (propValue, propLabel) => {
 			let newObject = {
@@ -30,10 +30,23 @@ function DropdownCompanies({handleOnChange}) {
 			});
 			return storedOptions;
 		};
-		return storeOptions(companies);
+		return storeOptions(array);
 	};
 
-	const options = getOptions(companies);
+	const getDefaultValue = (array, value) => {
+		const foundObject = array.find((property) => property.value === value);
+		if (!foundObject) {
+			const defaultValueObject = {
+				label: "Select a Company",
+				value: 0,
+				isdisabled: true,
+			};
+			return defaultValueObject;
+		}
+		return foundObject;
+	};
+	let DEFAULT_VALUE = getDefaultValue(companies, 0);
+	const options = getOptions(companies).concat(DEFAULT_VALUE);
 	return (
 		<Form.Group as={Col} className='mb-3'>
 			<Form.Label>Companies</Form.Label>
@@ -42,6 +55,8 @@ function DropdownCompanies({handleOnChange}) {
 				options={options}
 				Searchable
 				onChange={handleOnChange}
+				defaultValue={DEFAULT_VALUE}
+				isOptionDisabled={(DEFAULT_VALUE) => DEFAULT_VALUE.isdisabled} // disable an option
 			/>
 		</Form.Group>
 	);
