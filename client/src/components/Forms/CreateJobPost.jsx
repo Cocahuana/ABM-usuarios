@@ -186,6 +186,7 @@ function CreateJobPost() {
 								selected={date}
 								value={jobPost.fInicioBusqueda}
 								onChange={(fecha) => handleDate(fecha)}
+								className='form-control'
 							/>
 						</Form.Group>
 					</Row>
