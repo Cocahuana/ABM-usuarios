@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 :root {
 	/*
 	*
@@ -5,12 +7,13 @@
 	*
 	*/
 	/* Crear variables para fuentes, tipos y tamaños de letra */
-	--violet: #b29ddb;
-	--violet-light: #e5ceff;
-	--violet-dark: #826fa9;
-	--blue: #1875d1;
+	--red-pink: #d3145a;
+	--red-pink-light: #e5ceff;
+	--red-pink-dark: #826fa9;
+	--blue: #3e5dfb;
 	--blue-light: #63a3ff;
 	--blue-dark: #004a9f;
+	--grey: #777777;
 	--orange: #f39243;
 	--white: #ffffff;
 	--black: #000000;
@@ -30,26 +33,36 @@
 		* Primary
 		*
 		*/
-	--primary: var(--violet);
-	--primary-light: var(--violet-light);
-	--primary-dark: var(--violet-dark);
+	--primary: var(--blue);
+	--primary-light: var(--blue-light);
+	--primary-dark: var(--blue-dark);
 	--primary-text: var(--white);
 	/*
 		*
 		* Secondary
 		*
 		*/
-	--secondary: var(--blue);
-	--secondary-light: var(--blue-light);
-	--secondary-dark: var(--blue-dark);
+	--secondary: var(--red-pink);
+	--secondary-light: var(--red-pink-light);
+	--secondary-dark: var(--red-pink-dark);
 	--secondary-text: var(--dark);
-}
 
+	/* font-family: 'Poppins', sans-serif; */
+	/* font-family: 'Montserrat', sans-serif; */
+	--ff-Montserrat: "Montserrat", sans-serif;
+	--ff-Poppins: "Poppins", sans-serif;
+	/* Monserrat es distinto */
+	--primary-text: var(--ff-Montserrat);
+	/* Popins es mas grueso */
+	--secondary-text: var(--ff-Poppins);
+}
+* {
+	font-family: var(--primary-text);
+}
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-		"Helvetica Neue", sans-serif;
+	/* font-family: -apple-system, BlinkMacSystemFont; */
+	font-family: var(--primary-text);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -59,6 +72,7 @@ code {
 		monospace;
 }
 a {
+	font-family: var(--secondary-text);
 	display: block;
 	text-decoration: none;
 }
