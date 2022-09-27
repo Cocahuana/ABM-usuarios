@@ -34,7 +34,6 @@ function DropdownEstudios({handleOnChange}) {
 	};
 
 	const options = getOptions(studies);
-	console.log(options);
 	const def = [{value: 0, label: "No selected"}];
 	return (
 		<Form.Group as={Col} className='mb-3'>

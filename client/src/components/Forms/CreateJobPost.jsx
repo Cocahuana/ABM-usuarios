@@ -5,6 +5,7 @@ import {useToast} from "@chakra-ui/react";
 import {Button} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import {getJobsPosting, createJobPosting} from "../../actions";
 import BtnGoBack from "../Buttons/BtnGoBack";
 import CustomInput from "./CustomInput";
@@ -12,6 +13,9 @@ import DropdownEstudios from "./CustomSelects.jsx/DropdownEstudios";
 import {validateJobPosting} from "./validateJobPosting";
 import CustomSelect from "./CustomSelects.jsx/CustomSelect";
 import DropdownCompanies from "./CustomSelects.jsx/DropdownCompanies";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 function CreateJobPost() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -20,6 +24,8 @@ function CreateJobPost() {
 	const toastDescription = "Job Posting Created successfully";
 	const [errors, setErrors] = useState({});
 	const [validated, setValidated] = useState(false);
+	const [date, setDate] = useState(new Date());
+
 	const [jobPost, setJobPost] = useState({
 		idOrden: undefined,
 		nombre: "",
@@ -29,7 +35,7 @@ function CreateJobPost() {
 		skill: "",
 		empresaId: "",
 		ciudad: "",
-		accontManagerId: "",
+		accontManagerId: 1,
 		fInicioBusqueda: "",
 		contratacionTipo: "",
 		salario: "",
@@ -94,6 +100,16 @@ function CreateJobPost() {
 		// 	});
 		// });
 	}
+	function handleDate(date) {
+		console.log("Date: ", date);
+		// Date is an object
+		let dateString = date.toLocaleString();
+		// console.log("DateString: ", dateString);
+		setJobPost({
+			...jobPost,
+			fInicioBusqueda: dateString,
+		});
+	}
 
 	function handleOnChange(e) {
 		let {name, value} = e.target;
@@ -111,6 +127,7 @@ function CreateJobPost() {
 				[name]: value,
 			})
 		);
+		console.log("Job posting: ", jobPost);
 	}
 
 	const candidatos = [
@@ -138,21 +155,21 @@ function CreateJobPost() {
 							errors={errors.nombre}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
-						<CustomInput
+						{/* <CustomInput
 							title={"Recruiter (descolgable)"}
 							name={"test"}
 							type={"text"}
 							placeholder={"I am a select"}
 							value={"Not assigned yet"}
 							errors={"errors.nombre"}
-						/>
+						/> */}
 						<CustomInput
 							title={"Account Manager"}
-							name={"test"}
-							type={"text"}
+							name={"accontManagerId"}
+							type={"number"}
 							placeholder={"I am a select"}
-							value={"Not assigned yet"}
-							errors={"errors.nombre"}
+							value={jobPost.accontManagerId}
+							errors={errors.nombre}
 						/>
 						<CustomInput
 							title={"Start Date: (data picker)"}
@@ -162,6 +179,15 @@ function CreateJobPost() {
 							value={"Not assigned yet"}
 							errors={"errors.nombre"}
 						/>
+						<Form.Group as={Col} className='mb-3'>
+							<Form.Label>Start Date</Form.Label>
+							<DatePicker
+								dateFormat='MM/dd/yyyy'
+								selected={date}
+								value={jobPost.fInicioBusqueda}
+								onChange={(fecha) => handleDate(fecha)}
+							/>
+						</Form.Group>
 					</Row>
 					<Row>
 						<CustomInput
@@ -174,29 +200,29 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"Tests (examenes)"}
+							title={"Tests (descolgable con examenes)"}
 							name={"test"}
 							type={"text"}
 							placeholder={"I am a select"}
 							value={"Not assigned yet"}
 							errors={"errors.nombre"}
 						/>
-						<CustomInput
+						{/* <CustomInput
 							title={"Attachments"}
 							name={"test"}
 							type={"text"}
 							placeholder={"I am a select"}
 							value={"Not assigned yet"}
 							errors={"errors.nombre"}
-						/>
-						<CustomInput
+						/> */}
+						{/* <CustomInput
 							title={"Job Posting state"}
 							name={"test"}
 							type={"text"}
 							placeholder={"I am a select"}
 							value={"Not assigned yet"}
 							errors={"errors.nombre"}
-						/>
+						/> */}
 					</Row>
 				</fieldset>
 				{/* Green */}
@@ -248,7 +274,7 @@ function CreateJobPost() {
 				<fieldset style={{border: "3px solid"}} className='px-2'>
 					<legend className='float-none w-auto p-2'>Orange</legend>
 					<Row>
-						<CustomInput
+						{/* <CustomInput
 							title={"State"}
 							name={"duracion"}
 							type={"text"}
@@ -256,7 +282,7 @@ function CreateJobPost() {
 							value={jobPost.duracion}
 							errors={errors.duracion}
 							handleOnChange={(e) => handleOnChange(e)}
-						/>
+						/> */}
 						<CustomInput
 							title={"Duration"}
 							name={"duracion"}
@@ -267,7 +293,7 @@ function CreateJobPost() {
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
 						<CustomInput
-							title={"Type"}
+							title={"Job Type"}
 							name={"contratacionTipo"}
 							type={"text"}
 							placeholder={"Full-time, part-time"}
@@ -339,7 +365,7 @@ function CreateJobPost() {
 								})
 							}
 						/>
-						<CustomInput
+						{/* <CustomInput
 							title={"Department"}
 							name={"ciudad"}
 							type={"text"}
@@ -347,8 +373,8 @@ function CreateJobPost() {
 							value={jobPost.ciudad}
 							errors={errors.ciudad}
 							handleOnChange={(e) => handleOnChange(e)}
-						/>
-						<CustomInput
+						/> */}
+						{/* <CustomInput
 							title={"Contact"}
 							name={"ciudad"}
 							type={"text"}
@@ -358,7 +384,7 @@ function CreateJobPost() {
 							value={jobPost.ciudad}
 							errors={errors.ciudad}
 							handleOnChange={(e) => handleOnChange(e)}
-						/>
+						/> */}
 						<CustomInput
 							title={"City"}
 							name={"ciudad"}
@@ -387,7 +413,7 @@ function CreateJobPost() {
 							errors={errors.jobLevel}
 							handleOnChange={(e) => handleOnChange(e)}
 						/>
-						<CustomInput
+						{/* <CustomInput
 							title={"Type from company job order"}
 							name={"contratacionTipo"}
 							type={"text"}
@@ -395,8 +421,8 @@ function CreateJobPost() {
 							value={jobPost.contratacionTipo}
 							errors={errors.contratacionTipo}
 							handleOnChange={(e) => handleOnChange(e)}
-						/>
-						<CustomSelect
+						/> */}
+						{/* <CustomSelect
 							title={"Candidates"}
 							name='candidates'
 							options={candidatos}
@@ -406,8 +432,8 @@ function CreateJobPost() {
 									candidatos: e.value,
 								})
 							}
-						/>
-						<CustomInput
+						/> */}
+						{/* <CustomInput
 							title={"Employee status"}
 							name={"ciudad"}
 							type={"text"}
@@ -415,7 +441,7 @@ function CreateJobPost() {
 							value={jobPost.ciudad}
 							errors={errors.ciudad}
 							handleOnChange={(e) => handleOnChange(e)}
-						/>
+						/> */}
 					</Row>
 				</fieldset>
 

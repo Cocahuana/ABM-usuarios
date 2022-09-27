@@ -15,9 +15,11 @@
 		"bootstrap": "^5.2.0",
 		"dotenv": "^16.0.2",
 		"framer-motion": "^7.3.5",
+		"nth-check": ">=2.0.1",
 		"react": "^18.2.0",
 		"react-bootstrap": "^2.5.0",
 		"react-data-table-component": "^7.5.3",
+		"react-datepicker": "^4.8.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.4.0",
 		"react-redux": "^8.0.2",
@@ -27,8 +29,7 @@
 		"redux": "^4.2.0",
 		"redux-thunk": "^2.4.1",
 		"styled-components": "^5.3.5",
-		"web-vitals": "^2.1.4",
-		"nth-check": ">=2.0.1"
+		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -58,7 +59,7 @@
 	},
 	"devDependencies": {
 		"gh-pages": "^4.0.0",
-		"webpack": "^5.74.0",
-		"nth-check": ">=2.0.1"
+		"nth-check": ">=2.0.1",
+		"webpack": "^5.74.0"
 	}
 }
