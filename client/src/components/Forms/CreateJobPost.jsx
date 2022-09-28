@@ -16,6 +16,7 @@ import DropdownCompanies from "./CustomSelects.jsx/DropdownCompanies";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Container from "react-bootstrap/Container";
+import DropdownRecruiters from "./CustomSelects.jsx/DropdownRecruiters";
 
 function CreateJobPost() {
 	const navigate = useNavigate();
@@ -53,13 +54,8 @@ function CreateJobPost() {
 		empresa: "Hardcoded Company here",
 		ordenEstado: undefined,
 		candidatos: "",
+		recruiter: "",
 	});
-
-	// useEffect(() => {
-	// 	return () => {
-	// 		dispatch(getJobsPosting());
-	// 	};
-	// }, [dispatch]);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -160,14 +156,15 @@ function CreateJobPost() {
 									errors={errors.nombre}
 									handleOnChange={(e) => handleOnChange(e)}
 								/>
-								{/* <CustomInput
-							title={"Recruiter (descolgable)"}
-							name={"test"}
-							type={"text"}
-							placeholder={"I am a select"}
-							value={"Not assigned yet"}
-							errors={"errors.nombre"}
-						/> */}
+								<DropdownRecruiters
+									handleOnChange={(e) =>
+										setJobPost({
+											...jobPost,
+											recruiter: e.value,
+										})
+									}
+								/>
+
 								<CustomInput
 									title={"Account Manager"}
 									name={"accontManagerId"}
@@ -266,7 +263,14 @@ function CreateJobPost() {
 									errors={errors.competencias}
 									handleOnChange={(e) => handleOnChange(e)}
 								/>
-								<DropdownEstudios />
+								<DropdownEstudios
+									handleOnChange={(e) =>
+										setJobPost({
+											...jobPost,
+											estudiosId: e.value,
+										})
+									}
+								/>
 							</Row>
 						</fieldset>
 					</Row>

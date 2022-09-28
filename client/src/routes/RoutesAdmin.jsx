@@ -12,7 +12,6 @@ import CreateJobPost from "../components/Forms/CreateJobPost";
 import Companies from "../components/Company/Companies";
 
 import React from "react";
-import usePersona from "../CustomHooks/usePersona";
 
 function RoutesAdmin() {
 	const tipoAdmin = 0;

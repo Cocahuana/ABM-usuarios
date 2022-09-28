@@ -1,6 +1,5 @@
 import usePersonaTipo from "./usePersonaTipo";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPersonas } from "../actions";
 import { useEffect } from "react";
@@ -12,7 +11,7 @@ function usePersona ( personaTipoString ) {
     const dispatch = useDispatch();
     const typeId = usePersonaTipo( personaTipoString );
     useEffect( () => {
-        if ( !personasInfo ) dispatch( getPersonas() );
+        dispatch( getPersonas() );
     }, [dispatch] )
     let { personasInfo } = useSelector( ( state ) => state );
 
