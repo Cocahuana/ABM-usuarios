@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import CreatePeople from "../components/Forms/CreatePeople";
 import AddCompany from "../components/Forms/AddCompany";
 import Home from "../components/Home";
@@ -12,12 +12,15 @@ import CreateJobPost from "../components/Forms/CreateJobPost";
 import Companies from "../components/Company/Companies";
 
 import React from "react";
+import usePersona from "../CustomHooks/usePersona";
 
 function RoutesAdmin() {
 	const tipoAdmin = 0;
 	const tipoCandidato = 1;
 	const tipoCliente = 2;
 	const tipoRecruiter = 3;
+	const person = usePersona("admin");
+	console.log("person: ", person);
 	return (
 		<Routes>
 			<Route path='/' element={<Home />} />

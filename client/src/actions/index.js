@@ -110,6 +110,7 @@ const adapterOrdenFromApiToJobPost = ( orden ) => {
         idOrden: orden.idOrden,
         nombre: orden.nombre,
         cantPuestos: orden.cantPuestos,
+        ordenEstadoId: orden.ordenEstadoId,
         competencias: orden.competencias,
         duracion: orden.duracion,
         skill: orden.skill,
@@ -332,7 +333,8 @@ export function createJobPosting ( payload ) {
         try
         {
             let response = await axios.post( endpointOrdenFromApi, payload );
-            console.log( "Job Posting Created successfully" )
+            if ( response )
+                console.log( "Job Posting Created successfully" )
         }
         catch ( error )
         {
