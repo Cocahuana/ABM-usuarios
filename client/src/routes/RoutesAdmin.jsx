@@ -19,8 +19,6 @@ function RoutesAdmin() {
 	const tipoCandidato = 1;
 	const tipoCliente = 2;
 	const tipoRecruiter = 3;
-	const person = usePersona("admin");
-	console.log("person: ", person);
 	return (
 		<Routes>
 			<Route path='/' element={<Home />} />
