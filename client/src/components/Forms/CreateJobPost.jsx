@@ -90,6 +90,7 @@ function CreateJobPost() {
 				empresa: "",
 				ordenEstado: undefined,
 				candidatos: "",
+				recruiter: "",
 			});
 			// navigate(-1);
 			// toast({

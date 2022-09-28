@@ -132,6 +132,7 @@ const adapterOrdenFromApiToJobPost = ( orden ) => {
         empresa: orden.empresa,
         ordenEstado: orden.ordenEstado,
         candidatos: orden.candidatos,
+        recruiter: orden.recruiter,
     }
 }
 
