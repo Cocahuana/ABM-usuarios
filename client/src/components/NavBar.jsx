@@ -1,10 +1,10 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import {Link as RouterLink} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { ReactNode } from "react";
+import {ReactNode} from "react";
 import {
 	Box,
 	Flex,
@@ -21,13 +21,15 @@ import {
 	Stack,
 	useColorMode,
 	Center,
+	Image,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import {MoonIcon, SunIcon} from "@chakra-ui/icons";
+import mainLogo from "../utils/images/WHOA-logo-bg-white.png";
 function NavBar() {
 	// Dentro de NavDropdown.Item cuando usamos as={Link} to='/Alguna/ruta'
 	// estamos combinando React-Bootstrap con React-Router-Dom
-	const { colorMode, toggleColorMode } = useColorMode();
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const {colorMode, toggleColorMode} = useColorMode();
+	const {isOpen, onOpen, onClose} = useDisclosure();
 	return (
 		<>
 			<Box
@@ -42,7 +44,10 @@ function NavBar() {
 					justifyContent={"space-between"}>
 					<Flex alignItems={"center"}>
 						<Stack direction={"row"} spacing={7}>
-							<Flex alignItems={"center"}>Company Name</Flex>
+							<Flex alignItems={"center"}>
+								{/* <Image src={mainLogo} w='auto' h='120px' /> */}{" "}
+								Whoa!
+							</Flex>
 							<Menu>
 								<MenuButton
 									as={Button}
@@ -70,6 +75,9 @@ function NavBar() {
 							<Flex alignItems={"center"}>
 								<Button as={RouterLink} to='/Company'>
 									Company
+								</Button>
+								<Button as={RouterLink} to='/jobPosting'>
+									Job orders
 								</Button>
 							</Flex>
 						</Stack>

@@ -31,7 +31,7 @@ function CreateJobPost() {
 	const [jobPost, setJobPost] = useState({
 		nombre: "",
 		cantPuestos: 0,
-		ordenEstadoId: 1,
+		ordenEstadoId: 1, //1 = Iniciada
 		competencias: "",
 		duracion: "",
 		skill: "",

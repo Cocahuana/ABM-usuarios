@@ -2,10 +2,9 @@ import React from "react";
 // import { useDispatch } from "react-redux";
 import DataTable from "react-data-table-component";
 import FormUpdateModal from "./Modals/FormUpdateModal";
-
+import BtnPeopleUpdate from "./Buttons/BtnPeopleUpdate";
 function PeopleList(props) {
-	let { personaTipo } = props;
-	// const dispatch = useDispatch();
+	let {personaTipo} = props;
 	const paginacionOpciones = {
 		rowsPerPageText: "Rows Per Page",
 		rangeSeparatorText: "of",
@@ -45,11 +44,7 @@ function PeopleList(props) {
 			sortable: false,
 			compact: true,
 			cell: (e) => {
-				return (
-					<>
-						<FormUpdateModal personId={e.personaId} />
-					</>
-				);
+				return <BtnPeopleUpdate id={e.personaId} />;
 			},
 		},
 	];

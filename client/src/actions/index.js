@@ -1,14 +1,14 @@
-import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL, GET_STUDIES, GET_COMPANIES } from './actions'
+import { GET_PERSONAS, DELETE_PERSONA, GET_PEOPLE_DETAIL, GET_PEOPLE_BY_NAME, ORDER_BY_FIRST_NAME, GET_JOBS_POSTING, GET_JOB_POSTING_DETAIL, GET_STUDIES, GET_COMPANIES, GET_ORDEN_ESTADOS } from './actions'
 // import json from '../utils/personas.json';
 import axios from 'axios';
 const endpointPersonasFromApi = "http://yamana.somee.com/api/personas";
 const endpointOrdenFromApi = "http://yamana.somee.com/api/Ordenes";
-const yamana = "";
+const yamana = "http://yamana.somee.com/api";
 const estudios = yamana + "/Estudios";
 const ordenes = yamana + "/Ordenes";
 const personas = yamana + "/personas";
 const empresas = yamana + "/Empresas";
-
+const ordenEstados = yamana + "/OrdenEstados";
 
 // const personasJson = '../../utils/personas.json';
 
@@ -78,6 +78,7 @@ const adapterOrdenesFromApiToJobPost = ( orden ) => {
             idOrden: orden.idOrden,
             nombre: orden.nombre,
             cantPuestos: orden.cantPuestos,
+            ordenEstadoId: orden.ordenEstadoId,
             competencias: orden.competencias,
             duracion: orden.duracion,
             skill: orden.skill,
@@ -170,6 +171,16 @@ const adapterCompaniesFromApi = ( companies ) => {
         }
     } )
     return newCompanies
+}
+
+const adapterOrdenEstadosFromApi = ( orden ) => {
+    let newJobPostingState = orden.map( ( orden ) => {
+        return {
+            value: orden.estadoId,
+            label: orden.descripcion,
+        }
+    } );
+    return newJobPostingState;
 }
 
 export function getPersonas () {
@@ -386,6 +397,24 @@ export function createCompany ( payload ) {
         {
             let response = await axios.post( empresas, payload );
             console.log( "Company Created successfully" )
+        }
+        catch ( error )
+        {
+            console.log( error );
+        }
+    }
+}
+
+export function getJobPostingStates () {
+    return async function ( dispatch ) {
+        try
+        {
+            let ordenEstadosFromApi = await axios.get( ordenEstados );
+            let formattedOrdenEstados = adapterCompaniesFromApi( ordenEstadosFromApi.data );
+            return dispatch( {
+                type: GET_ORDEN_ESTADOS,
+                payload: formattedOrdenEstados
+            } )
         }
         catch ( error )
         {

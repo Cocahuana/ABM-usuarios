@@ -10,7 +10,7 @@ import Recruiters from "../components/Recruiter/Recruiters";
 import FormUpdatePeople from "../components/Forms/FormUpdatePeople";
 import CreateJobPost from "../components/Forms/CreateJobPost";
 import Companies from "../components/Company/Companies";
-
+import JobPosting from "../components/JobPosting";
 import React from "react";
 
 function RoutesAdmin() {
@@ -41,6 +41,7 @@ function RoutesAdmin() {
 			<Route path='/People/update/:id' element={<FormUpdatePeople />} />
 			<Route path='/Company' element={<Companies />} />
 			<Route path='/Company/add' element={<AddCompany />} />
+			<Route path='/JobPosting' element={<JobPosting />} />
 			<Route path='/JobPosting/add' element={<CreateJobPost />} />
 		</Routes>
 	);

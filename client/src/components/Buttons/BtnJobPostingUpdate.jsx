@@ -1,11 +1,10 @@
-import React from "react";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-function BtnPeopleUpdate({id}) {
+function BtnJobPostingUpdate({id}) {
 	const navigate = useNavigate();
 	const handleOnUpdate = (e, id) => {
 		e.preventDefault();
-		navigate(`/People/update/${id}`);
+		navigate(`/jobPosting/update/${id}`);
 	};
 	return (
 		<Button variant='primary' onClick={(e) => handleOnUpdate(e, id)}>
@@ -14,4 +13,4 @@ function BtnPeopleUpdate({id}) {
 	);
 }
 
-export default BtnPeopleUpdate;
+export default BtnJobPostingUpdate;

@@ -20,7 +20,7 @@ function App () {
   return (
     <>
       <NavBar />
-      { token === 'admin' ? <RoutesAdmin /> : <h1>No way men</h1> }
+      { token === 'admin' ? <RoutesAdmin /> : <h1>Please, Log in please</h1> }
     </>
   );
 }
