@@ -1,5 +1,6 @@
 import DataTable from "react-data-table-component";
 import BtnJobPostingUpdate from "../Buttons/BtnJobPostingUpdate";
+import {getLabel} from "../../utils/getLabel";
 function JobPostingList(props) {
 	const {data, jobPostingStates} = props;
 	const paginacionOpciones = {
@@ -7,18 +8,6 @@ function JobPostingList(props) {
 		rangeSeparatorText: "of",
 		selectAllRowsItem: true,
 		selectAllRowsItemText: "All",
-	};
-	console.log("jobPosting: ", jobPostingStates);
-
-	const getLabel = (datinha) => {
-		let result = "xd";
-		for (let i = 0; i < jobPostingStates.length; i++) {
-			if (jobPostingStates[i].value === datinha) {
-				result = jobPostingStates[i].label;
-				break;
-			}
-		}
-		return result;
 	};
 
 	const columns = [
@@ -34,7 +23,8 @@ function JobPostingList(props) {
 		},
 		{
 			name: "Job Post State",
-			selector: (row) => getLabel(row.ordenEstadoId),
+			selector: (row) =>
+				getLabel(row.ordenEstadoId, jobPostingStates, "value", "label"),
 			sortable: true,
 		},
 		{
