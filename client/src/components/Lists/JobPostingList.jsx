@@ -8,10 +8,17 @@ function JobPostingList(props) {
 		selectAllRowsItem: true,
 		selectAllRowsItemText: "All",
 	};
+	console.log("jobPosting: ", jobPostingStates);
 
 	const getLabel = (datinha) => {
-		if (datinha === 1) return "Iniciada";
-		if (datinha === 2) return "Sin Facturar";
+		let result = "xd";
+		for (let i = 0; i < jobPostingStates.length; i++) {
+			if (jobPostingStates[i].value === datinha) {
+				result = jobPostingStates[i].label;
+				break;
+			}
+		}
+		return result;
 	};
 
 	const columns = [

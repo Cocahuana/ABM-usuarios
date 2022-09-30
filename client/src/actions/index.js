@@ -410,7 +410,7 @@ export function getJobPostingStates () {
         try
         {
             let ordenEstadosFromApi = await axios.get( ordenEstados );
-            let formattedOrdenEstados = adapterCompaniesFromApi( ordenEstadosFromApi.data );
+            let formattedOrdenEstados = adapterOrdenEstadosFromApi( ordenEstadosFromApi.data );
             return dispatch( {
                 type: GET_ORDEN_ESTADOS,
                 payload: formattedOrdenEstados

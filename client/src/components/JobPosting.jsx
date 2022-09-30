@@ -8,18 +8,16 @@ import JobPostingList from "./Lists/JobPostingList";
 import SearchBar from "./SearchBar";
 function JobPosting() {
 	const [loading, setLoading] = useState(false);
-
+	const ordenes = useSelector((state) => state.jobsPosting);
+	const ordenEstados = useSelector((state) => state.jobPostingStates);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		return () => {
 			dispatch(getJobsPosting());
 			dispatch(getJobPostingStates());
-			if (ordenes) setLoading(true);
+			if (ordenes && ordenEstados) setLoading(true);
 		};
 	}, [dispatch]);
-
-	const ordenes = useSelector((state) => state.jobsPosting);
-	const ordenEstados = useSelector((state) => state.jobPostingStates);
 
 	return (
 		<>
