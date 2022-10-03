@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {Box, Stack, Input, InputGroup, Button} from "@chakra-ui/react";
-import {getJobPostingStates, getJobsPosting} from "../../actions";
+import {getJobPostingStates, getJobsPosting} from "../../actions/ordenes";
 import JobPostingList from "../Lists/JobPostingList";
 import LoadingSpinner from "../Spinners/LoadingSpinner";
 import SearchBarOrder from "../Lists/SearchBarOrder";

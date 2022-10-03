@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {getJobPostingByTitle} from "../../actions";
+import {getJobPostingByTitle} from "../../actions/ordenes/index";
 function SearchBarOrder() {
 	const {colorMode, toggleColorMode} = useColorMode();
 	const dispatch = useDispatch();
