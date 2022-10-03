@@ -28,13 +28,8 @@ function JobPostingList(props) {
 			sortable: true,
 		},
 		{
-			name: "Phone",
-			selector: (row) => row.telMovil,
-			sortable: true,
-		},
-		{
-			name: "Country",
-			selector: (row) => row.domPais,
+			name: "Candidates",
+			selector: (row) => row.candidatos,
 			sortable: true,
 		},
 		{

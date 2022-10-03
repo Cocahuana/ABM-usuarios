@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {Spinner} from "@chakra-ui/react";
 import {Box, Stack, Input, InputGroup, Button} from "@chakra-ui/react";
-import {getJobPostingStates, getJobsPosting} from "../actions";
-import JobPostingList from "./Lists/JobPostingList";
-import SearchBar from "./SearchBar";
+import {getJobPostingStates, getJobsPosting} from "../../actions";
+import JobPostingList from "../Lists/JobPostingList";
+import LoadingSpinner from "../Spinners/LoadingSpinner";
+import SearchBarOrder from "../Lists/SearchBarOrder";
 function JobPosting() {
 	const [loading, setLoading] = useState(false);
 	const ordenes = useSelector((state) => state.jobsPosting);
@@ -22,28 +22,14 @@ function JobPosting() {
 	return (
 		<>
 			{loading === false ? (
-				<Stack
-					w='100%'
-					h='90vh'
-					direction={"column"}
-					justify='center'
-					align={"center"}>
-					<Spinner
-						thickness='4px'
-						speed='0.65s'
-						emptyColor='gray.200'
-						color='blue.500'
-						size='xl'
-						justifyContent={"center"}
-					/>
-				</Stack>
+				<LoadingSpinner />
 			) : (
 				<Stack
 					direction={"column"}
 					justify='center'
 					align={"center"}
 					padding='10px'>
-					<SearchBar />
+					<SearchBarOrder />
 					<JobPostingList
 						data={ordenes}
 						jobPostingStates={ordenEstados}

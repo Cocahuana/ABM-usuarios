@@ -10,7 +10,7 @@ import Recruiters from "../components/Recruiter/Recruiters";
 import FormUpdatePeople from "../components/Forms/FormUpdatePeople";
 import CreateJobPost from "../components/Forms/CreateJobPost";
 import Companies from "../components/Company/Companies";
-import JobPosting from "../components/JobPosting";
+import JobPosting from "../components/JobPosting/JobPosting";
 import React from "react";
 
 function RoutesAdmin() {
