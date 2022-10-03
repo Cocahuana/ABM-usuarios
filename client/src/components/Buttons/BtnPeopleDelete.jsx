@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useToast } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
-import { deleteUserById } from "../../actions";
+import React, {useState} from "react";
+import {useToast} from "@chakra-ui/react";
+import {useDispatch} from "react-redux";
+import {deleteUserById} from "../../actions/personas";
 // import { Button } from "react-bootstrap";
 
 import styled from "styled-components";
@@ -14,7 +14,7 @@ const BtnDanger = styled.button`
 const toastTitle = "Admin";
 const toastDescription = "Admin Eliminated successfully";
 
-function BtnPeopleDelete({ id, closeModal }) {
+function BtnPeopleDelete({id, closeModal}) {
 	const toast = useToast();
 	// Con e.preventDefault evitamos que al montar un componente se ejecute el boton
 	const dispatch = useDispatch();

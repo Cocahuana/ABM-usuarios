@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 // import Form from "react-bootstrap/Form";
 // import { Button } from "react-bootstrap";
 
-import { getPeopleByName } from "../actions";
+import { getPeopleByName } from "../actions/personas";
 function SearchBar({ personaTipoId }) {
 	const { colorMode, toggleColorMode } = useColorMode();
 

@@ -2,7 +2,7 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Select from "react-select";
 import {useSelector} from "react-redux";
-import {getStudies} from "../../../actions";
+import {getStudies} from "../../../actions/estudios";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 function DropdownEstudios({handleOnChange}) {

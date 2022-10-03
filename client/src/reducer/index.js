@@ -3,13 +3,10 @@ import {
     GET_PEOPLE_DETAIL,
     GET_PEOPLE_BY_NAME,
     ORDER_BY_FIRST_NAME,
-    GET_JOBS_POSTING,
-    GET_JOB_POSTING_DETAIL,
-    GET_STUDIES,
-    GET_COMPANIES,
-    GET_ORDEN_ESTADOS,
-    GET_ORDEN_BY_TITLE,
-} from "../actions/actions";
+} from "../actions/personas/types";
+import { GET_COMPANIES, } from "../actions/empresas/types";
+import * as orden from "../actions/ordenes/types";
+import * as estudios from "../actions/estudios/types"
 const initialState = {
     personasInfo: [],
     personaDetalle: [],
@@ -21,6 +18,7 @@ const initialState = {
 };
 
 function rootReducer ( state = initialState, action ) {
+
     switch ( action.type )
     {
         case GET_PERSONAS:
@@ -71,18 +69,8 @@ function rootReducer ( state = initialState, action ) {
                 ...state,
                 personasInfo: sortedName,
             };
-        case GET_JOBS_POSTING:
-            return {
-                ...state,
-                jobsPosting: action.payload,
-            };
-        case GET_JOB_POSTING_DETAIL:
-            // console.log( action.payload );
-            return {
-                ...state,
-                jobPostingDetail: action.payload,
-            };
-        case GET_STUDIES:
+
+        case estudios.GET_STUDIES:
             return {
                 ...state,
                 studies: action.payload,
@@ -93,16 +81,28 @@ function rootReducer ( state = initialState, action ) {
                 ...state,
                 companies: action.payload,
             };
-        case GET_ORDEN_ESTADOS:
+        /******* Ordenes *******/
+        case orden.GET_ORDEN_ESTADOS:
             return {
                 ...state,
                 jobPostingStates: action.payload,
             };
-        case GET_ORDEN_BY_TITLE:
+        case orden.GET_ORDEN_BY_TITLE:
             return {
                 ...state,
                 jobsPosting: action.payload,
             }
+        case orden.GET_JOBS_POSTING:
+            return {
+                ...state,
+                jobsPosting: action.payload,
+            };
+        case orden.GET_JOB_POSTING_DETAIL:
+            // console.log( action.payload );
+            return {
+                ...state,
+                jobPostingDetail: action.payload,
+            };
         default:
             return state;
     }

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
-import {getCompanies} from "../../actions";
+import {getCompanies} from "../../actions/empresas";
 import {useDispatch, useSelector} from "react-redux";
 import {Button} from "react-bootstrap";
 import PeopleList from "../PeopleList";

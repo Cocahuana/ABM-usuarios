@@ -1,7 +1,7 @@
 import usePersonaTipo from "./usePersonaTipo";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getPersonas } from "../actions";
+import { getPersonas } from "../actions/personas";
 import { useEffect } from "react";
 
 // Este hook recibe un string que debe estar relacionado con los tipos de personas existentes en el endpoint PersonaTipos

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import Select from "react-select";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import BtnGoBack from "../Buttons/BtnGoBack";
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { createCompany } from "../../actions";
+import {createCompany} from "../../actions/empresas";
 
 function validate(company) {
 	let {
@@ -126,30 +126,30 @@ export default function AddCompany() {
 	// }, [dispatch]);
 
 	const options = [
-		{ value: 0, label: "Admin" },
-		{ value: 1, label: "Candidate" },
-		{ value: 2, label: "Client" },
-		{ value: 3, label: "Recruiter" },
+		{value: 0, label: "Admin"},
+		{value: 1, label: "Candidate"},
+		{value: 2, label: "Client"},
+		{value: 3, label: "Recruiter"},
 	];
 	const tipoDocumento = [
-		{ value: 1, label: "L.E / DNI" },
-		{ value: 4, label: "Carnet de Extranjeria" },
-		{ value: 7, label: "Pasaporte" },
+		{value: 1, label: "L.E / DNI"},
+		{value: 4, label: "Carnet de Extranjeria"},
+		{value: 7, label: "Pasaporte"},
 	];
 	const pais = [
-		{ value: "argentina", label: "Argentina" },
-		{ value: "peru", label: "perú" },
-		{ value: "chile", label: "Chile" },
+		{value: "argentina", label: "Argentina"},
+		{value: "peru", label: "perú"},
+		{value: "chile", label: "Chile"},
 	];
 	const provincia = [
-		{ value: "caba", label: "CABA" },
-		{ value: "buenos aires", label: "Buenos Aires" },
-		{ value: "cordoba", label: "Cordoba" },
+		{value: "caba", label: "CABA"},
+		{value: "buenos aires", label: "Buenos Aires"},
+		{value: "cordoba", label: "Cordoba"},
 	];
 	const localidad = [
-		{ value: "palermo", label: "Palermo" },
-		{ value: "villa urquiza", label: "Villa Urquiza" },
-		{ value: "avellaneda", label: "Avellaneda" },
+		{value: "palermo", label: "Palermo"},
+		{value: "villa urquiza", label: "Villa Urquiza"},
+		{value: "avellaneda", label: "Avellaneda"},
 	];
 
 	function handleSubmit(e) {
@@ -172,7 +172,7 @@ export default function AddCompany() {
 	}
 
 	function handleOnChange(e) {
-		let { name, value } = e.target;
+		let {name, value} = e.target;
 
 		// Los selects no devuelven un name, por lo que el value del e.target
 		// se lo tenemos que asignar al value del key de nuestro useState
@@ -193,7 +193,7 @@ export default function AddCompany() {
 		<div>
 			<Form className='p-4' onSubmit={handleSubmit}>
 				<h3>Company</h3>
-				<fieldset style={{ border: "3px solid" }} className='px-2'>
+				<fieldset style={{border: "3px solid"}} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Company Information
 					</legend>
@@ -299,7 +299,7 @@ export default function AddCompany() {
 						</Form.Group>
 					</Row>
 				</fieldset>
-				<fieldset style={{ border: "3px solid" }} className='px-2'>
+				<fieldset style={{border: "3px solid"}} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Contact Information
 					</legend>

@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
-import { getPersonaDetail, getPersonas, updatePeopleById } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useEffect, useRef} from "react";
+import {
+	getPersonaDetail,
+	getPersonas,
+	updatePeopleById,
+} from "../../actions/personas";
+import {useDispatch, useSelector} from "react-redux";
 import Select from "react-select";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { validate } from "./PeopleValidation";
+import {validate} from "./PeopleValidation";
 import BtnGoBack from "../Buttons/BtnGoBack";
 
 function FormUpdatePeople() {
@@ -38,9 +42,9 @@ function FormUpdatePeople() {
 		domCp: "",
 	});
 
-	const { personaDetalle } = useSelector((state) => state);
+	const {personaDetalle} = useSelector((state) => state);
 
-	const { id } = useParams();
+	const {id} = useParams();
 	useEffect(() => {
 		asyncLoadOfPerson();
 	}, [dispatch, id, flagCargaPersona]);
@@ -107,34 +111,34 @@ function FormUpdatePeople() {
 	}
 
 	const options = [
-		{ value: 0, label: "Admin" },
-		{ value: 1, label: "Client" },
-		{ value: 2, label: "Recruiter" },
-		{ value: 3, label: "Candidate" },
+		{value: 0, label: "Admin"},
+		{value: 1, label: "Client"},
+		{value: 2, label: "Recruiter"},
+		{value: 3, label: "Candidate"},
 	];
 	let tipoDocumento = [
-		{ value: 0, label: "Driver Licence / ID" },
+		{value: 0, label: "Driver Licence / ID"},
 		{
 			value: 1,
 			label: "Passport",
 		},
 	];
 	const pais = [
-		{ value: "Netherland", label: "Netherland" },
-		{ value: "Argentina", label: "Argentina" },
-		{ value: "Chile", label: "Chile" },
+		{value: "Netherland", label: "Netherland"},
+		{value: "Argentina", label: "Argentina"},
+		{value: "Chile", label: "Chile"},
 	];
 	const provincia = [
-		{ value: "caba", label: "CABA" },
-		{ value: "Buenos Aires", label: "Buenos Aires" },
-		{ value: "cordoba", label: "Cordoba" },
+		{value: "caba", label: "CABA"},
+		{value: "Buenos Aires", label: "Buenos Aires"},
+		{value: "cordoba", label: "Cordoba"},
 	];
 	const localidad = [
-		{ value: "palermo", label: "Palermo" },
-		{ value: "villa urquiza", label: "Villa Urquiza" },
-		{ value: "avellaneda", label: "Avellaneda" },
-		{ value: "Padua", label: "Padua" },
-		{ value: "CABA", label: "CABA" },
+		{value: "palermo", label: "Palermo"},
+		{value: "villa urquiza", label: "Villa Urquiza"},
+		{value: "avellaneda", label: "Avellaneda"},
+		{value: "Padua", label: "Padua"},
+		{value: "CABA", label: "CABA"},
 	];
 
 	function handleSubmit(e) {
@@ -144,7 +148,7 @@ function FormUpdatePeople() {
 	}
 
 	function handleOnChange(e) {
-		let { name, value } = e.target;
+		let {name, value} = e.target;
 
 		// Los selects no devuelven un name, por lo que el value del e.target
 		// se lo tenemos que asignar al value del key de nuestro useState
@@ -175,7 +179,7 @@ function FormUpdatePeople() {
 					<Form className='p-4' onSubmit={handleSubmit}>
 						<h3>{personaTipoIdString}</h3>
 						<fieldset
-							style={{ border: "3px solid" }}
+							style={{border: "3px solid"}}
 							className='px-2'>
 							<legend className='float-none w-auto p-2'>
 								Personal Information
@@ -373,7 +377,7 @@ function FormUpdatePeople() {
 							</Row>
 						</fieldset>
 						<fieldset
-							style={{ border: "3px solid" }}
+							style={{border: "3px solid"}}
 							className='px-2'>
 							<legend className='float-none w-auto p-2'>
 								Location Information

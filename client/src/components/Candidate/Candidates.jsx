@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getPersonas } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
+import React, {useEffect} from "react";
+import {Link} from "react-router-dom";
+import {getPersonas} from "../../actions/personas";
+import {useDispatch, useSelector} from "react-redux";
+import {Button} from "react-bootstrap";
 import PeopleList from "../PeopleList";
 import SearchBar from "../SearchBar";
 
-function Candidates({ personTypeId }) {
+function Candidates({personTypeId}) {
 	const dispatch = useDispatch();
-	const { personasInfo } = useSelector((state) => state);
+	const {personasInfo} = useSelector((state) => state);
 
 	const candidatos = personasInfo.filter(
 		(e) => e.personaTipoId === personTypeId

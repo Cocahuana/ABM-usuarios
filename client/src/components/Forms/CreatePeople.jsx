@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { createPerson, getPersonas } from "../../actions";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useEffect} from "react";
+import {createPerson, getPersonas} from "../../actions/personas";
+import {useDispatch, useSelector} from "react-redux";
 import Select from "react-select";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import BtnGoBack from "../Buttons/BtnGoBack";
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import { validate } from "./PeopleValidation";
-import { useToast } from "@chakra-ui/react";
+import {validate} from "./PeopleValidation";
+import {useToast} from "@chakra-ui/react";
 
 export default function CreatePeople() {
 	const navigate = useNavigate();
@@ -46,30 +46,30 @@ export default function CreatePeople() {
 	}, [dispatch]);
 
 	const options = [
-		{ value: 0, label: "Admin" },
-		{ value: 1, label: "Candidate" },
-		{ value: 2, label: "Client" },
-		{ value: 3, label: "Recruiter" },
+		{value: 0, label: "Admin"},
+		{value: 1, label: "Candidate"},
+		{value: 2, label: "Client"},
+		{value: 3, label: "Recruiter"},
 	];
 	const tipoDocumento = [
-		{ value: 1, label: "L.E / DNI" },
-		{ value: 4, label: "Carnet de Extranjeria" },
-		{ value: 7, label: "Pasaporte" },
+		{value: 1, label: "L.E / DNI"},
+		{value: 4, label: "Carnet de Extranjeria"},
+		{value: 7, label: "Pasaporte"},
 	];
 	const pais = [
-		{ value: "argentina", label: "Argentina" },
-		{ value: "peru", label: "perú" },
-		{ value: "chile", label: "Chile" },
+		{value: "argentina", label: "Argentina"},
+		{value: "peru", label: "perú"},
+		{value: "chile", label: "Chile"},
 	];
 	const provincia = [
-		{ value: "caba", label: "CABA" },
-		{ value: "buenos aires", label: "Buenos Aires" },
-		{ value: "cordoba", label: "Cordoba" },
+		{value: "caba", label: "CABA"},
+		{value: "buenos aires", label: "Buenos Aires"},
+		{value: "cordoba", label: "Cordoba"},
 	];
 	const localidad = [
-		{ value: "palermo", label: "Palermo" },
-		{ value: "villa urquiza", label: "Villa Urquiza" },
-		{ value: "avellaneda", label: "Avellaneda" },
+		{value: "palermo", label: "Palermo"},
+		{value: "villa urquiza", label: "Villa Urquiza"},
+		{value: "avellaneda", label: "Avellaneda"},
 	];
 
 	function handleSubmit(e) {
@@ -106,7 +106,7 @@ export default function CreatePeople() {
 	}
 
 	function handleOnChange(e) {
-		let { name, value } = e.target;
+		let {name, value} = e.target;
 
 		// Los selects no devuelven un name, por lo que el value del e.target
 		// se lo tenemos que asignar al value del key de nuestro useState
@@ -127,7 +127,7 @@ export default function CreatePeople() {
 		<div>
 			<Form className='p-4' onSubmit={handleSubmit}>
 				<h3>Some People Type</h3>
-				<fieldset style={{ border: "3px solid" }} className='px-2'>
+				<fieldset style={{border: "3px solid"}} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Personal Information
 					</legend>
@@ -311,7 +311,7 @@ export default function CreatePeople() {
 						</Form.Group>
 					</Row>
 				</fieldset>
-				<fieldset style={{ border: "3px solid" }} className='px-2'>
+				<fieldset style={{border: "3px solid"}} className='px-2'>
 					<legend className='float-none w-auto p-2'>
 						Location Information
 					</legend>

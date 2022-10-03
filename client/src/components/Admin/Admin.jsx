@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {getPersonas} from "../../actions";
+import {getPersonas} from "../../actions/personas";
 import {useDispatch, useSelector} from "react-redux";
 import {Spinner} from "@chakra-ui/react";
 // import { Button } from "react-bootstrap";
