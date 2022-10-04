@@ -2,11 +2,10 @@ import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import usePersona from "../../../CustomHooks/usePersona";
 import Select from "react-select";
-
+import {getOptions} from "../../../utils/getOptions";
 function DropdownRecruiters({handleOnChange}) {
 	const recruiters = usePersona("recruiter");
-	console.log("recruiters select: ", recruiters);
-	const options = getOptions(recruiters);
+	const options = getOptions(recruiters, "personaId", "nombre");
 	return (
 		<Form.Group as={Col} className='mb-3'>
 			<Form.Label>Recruiters</Form.Label>
@@ -21,25 +20,6 @@ function DropdownRecruiters({handleOnChange}) {
 }
 
 export default DropdownRecruiters;
-
-const getOptions = (array) => {
-	// Formateamos la opcion de acuerdo a la dependencia Select
-	const newOption = (propValue, propLabel) => {
-		let newObject = {
-			value: propValue,
-			label: propLabel,
-		};
-		return newObject;
-	};
-	//
-	const storeOptions = (array) => {
-		const storedOptions = array.map((e) => {
-			return newOption(e.personaId, e.nombre);
-		});
-		return storedOptions;
-	};
-	return storeOptions(array);
-};
 
 const getDefaultValue = (array, value) => {
 	const foundObject = array.find((property) => property.value === value);
